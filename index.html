@@ -17,8 +17,7 @@ function show(id){document.querySelectorAll('.section').forEach(s=>s.classList.r
 function toast(msg){let t=document.getElementById('toast');t.innerText=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),1200);}function copy(id){let el=document.getElementById(id);navigator.clipboard.writeText(el.innerText);toast('Copied');}
 function checkPass(){if(passInput.value==='2035'){loginScreen.style.display='none';}else{alert('Wrong password');}}
 passInput.addEventListener('keypress',e=>{if(e.key==='Enter')checkPass();});userInput.addEventListener('keypress',e=>{if(e.key==='Enter')fetchData();});
-async function fetchData(){let u=userInput.value.trim();if(!u)return;let url=`https://pythbots.com/api/xatprofile.php?u=${u}`;let proxy=`https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(url)}`;try{let res=await fetch(proxy);let d=await res.json();fullName.innerText=d.name||'N/A';id.innerText=d.id||'N/A';username.innerText=d.nick||d.username||'N/A';imgLink.innerText=d.avatar||'N/A';avatar.src=d.avatar||'';}catch(e){toast('Error');}}
+async function fetchData(){let u=userInput.value.trim();if(!u)return;let url=`https://xat-api-secure.karimadilv74.workers.dev/?u=${u}`;let proxy=`url`;try{let res=await fetch(url);let d=await res.json();fullName.innerText=d.name||'N/A';id.innerText=d.id||'N/A';username.innerText=d.nick||d.username||'N/A';imgLink.innerText=d.avatar||'N/A';avatar.src=d.avatar||'';}catch(e){toast('Error');}}
 </script>
 </body>
 </html>
-
