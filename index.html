@@ -3,439 +3,321 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>xatProfile | Obsidian Elite</title>
-<link rel="icon" type="image/png" href="https://xatimg.com/image/8mgikUTBM7PK.png">
-<link rel="apple-touch-icon" href="https://xatimg.com/image/8mgikUTBM7PK.png">
+<title>xatProfile | Obsidian Elite X</title>
+
+<link rel="icon" href="https://xatimg.com/image/8mgikUTBM7PK.png">
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
 
 <style>
 :root{
 --bg:#050507;
---glass:rgba(15,15,20,0.8);
+--glass:rgba(20,20,30,0.65);
 --border:rgba(255,255,255,0.08);
 --accent:#ffffff;
---accent-dim:#64748b;
---success:#10b981;
---error:#ef4444;
+--green:#10b981;
+--red:#ef4444;
+--blue:#60a5fa;
 }
-*{box-sizing:border-box;margin:0;padding:0;transition:all .5s cubic-bezier(.2,1,.3,1);}
+
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Plus Jakarta Sans';transition:.4s;}
+
 body{
 background:var(--bg);
 color:#fff;
-font-family:'Plus Jakarta Sans',sans-serif;
 display:flex;
-align-items:center;
 justify-content:center;
+align-items:center;
 min-height:100vh;
-overflow-x:hidden;
-overflow-y:auto;
-position:relative;
-padding:40px 0;
-}
-body::before{
-content:'';
-position:fixed;
-width:300px;
-height:300px;
-background:radial-gradient(circle,rgba(255,255,255,.05) 0%,transparent 70%);
-top:10%;
-left:10%;
-animation:float 15s infinite alternate;
-z-index:-1;
-}
-body::after{
-content:'';
-position:fixed;
-width:400px;
-height:400px;
-background:radial-gradient(circle,rgba(255,255,255,.03) 0%,transparent 70%);
-bottom:10%;
-right:10%;
-animation:float 20s infinite alternate-reverse;
-z-index:-1;
-}
-@keyframes float{
-from{transform:translate(0,0);}
-to{transform:translate(50px,100px);}
-}
-.container{
-width:100%;
-max-width:440px;
-padding:20px;
-position:relative;
-z-index:10;
-}
-.premium-card{
-background:var(--glass);
-backdrop-filter:blur(40px);
--webkit-backdrop-filter:blur(40px);
-border:1px solid var(--border);
-border-radius:40px;
-padding:45px 40px;
-box-shadow:0 40px 100px rgba(0,0,0,.8);
-position:relative;
 overflow:hidden;
 }
-h2{
-font-weight:800;
-font-size:30px;
-letter-spacing:-1.5px;
-text-align:center;
-margin-bottom:35px;
-}
-h2 span{
-font-weight:300;
-opacity:.4;
-}
-input{
-width:100%;
-background:rgba(255,255,255,.02);
-border:1px solid var(--border);
-padding:22px;
-border-radius:24px;
-color:#fff;
-font-size:16px;
-outline:none;
-text-align:center;
-margin-bottom:20px;
-}
-input:focus{
-border-color:rgba(255,255,255,.2);
-background:rgba(255,255,255,.04);
-}
-.btn-main{
-width:100%;
-background:var(--accent);
-color:#000;
-padding:20px;
-border-radius:24px;
-border:none;
-font-weight:800;
-font-size:14px;
-cursor:pointer;
-text-transform:uppercase;
-letter-spacing:1px;
-}
-.profile-header{
-display:flex;
-flex-direction:column;
-align-items:center;
-margin-bottom:35px;
-}
-.avatar-container{
-width:130px;
-height:130px;
-border-radius:45px;
-padding:2px;
-background:linear-gradient(180deg,var(--border),transparent);
-margin-bottom:20px;
-overflow:hidden;
-position:relative;
-display:flex;
-align-items:center;
-justify-content:center;
-}
-#avatarImg{
+
+/* particles background */
+.particles{
+position:fixed;
 width:100%;
 height:100%;
-border-radius:43px;
-object-fit:cover;
-background:#000;
-opacity:0;
-transition:opacity .3s ease;
-}
-.sprite-mode{
-background-size:auto 100%!important;
-object-fit:none!important;
-background-repeat:no-repeat;
-background-position:0 0;
-}
-.status-badge{
-font-size:10px;
-font-weight:800;
-text-transform:uppercase;
-letter-spacing:2px;
-padding:8px 18px;
-border-radius:100px;
-margin-bottom:15px;
-border:1px solid transparent;
-display:flex;
-align-items:center;
-gap:6px;
-}
-.status-badge::before{
-content:'';
-width:6px;
-height:6px;
-border-radius:50%;
-display:inline-block;
-}
-.status-badge.online{
-background:rgba(16,185,129,.05);
-color:var(--success);
-border-color:rgba(16,185,129,.2);
-}
-.status-badge.online::before{
-background:var(--success);
-box-shadow:0 0 10px var(--success);
-animation:pulse 2s infinite;
-}
-.status-badge.offline{
-background:rgba(239,68,68,.05);
-color:var(--error);
-border-color:rgba(239,68,68,.2);
-}
-.status-badge.offline::before{
-background:var(--error);
-}
-@keyframes pulse{
-0%{transform:scale(1);opacity:1;}
-50%{transform:scale(1.5);opacity:.5;}
-100%{transform:scale(1);opacity:1;}
-}
-.display-name{
-font-size:26px;
-font-weight:800;
-margin-bottom:4px;
-letter-spacing:-.5px;
-text-align:center;
-}
-.display-id{
-font-size:12px;
-color:var(--accent-dim);
-font-weight:500;
-letter-spacing:1px;
-text-align:center;
-}
-.info-grid{
-display:flex;
-flex-direction:column;
-gap:12px;
-margin-top:20px;
-}
-.info-item{
-background:rgba(255,255,255,.01);
-border:1px solid var(--border);
-padding:18px 24px;
-border-radius:24px;
-cursor:pointer;
-position:relative;
+top:0;left:0;
+z-index:-2;
 overflow:hidden;
 }
-.info-item:hover{
-background:rgba(255,255,255,.03);
-border-color:rgba(255,255,255,.2);
-transform:scale(1.02);
+.particles span{
+position:absolute;
+width:4px;height:4px;
+background:#fff;
+opacity:.1;
+border-radius:50%;
+animation:move 20s linear infinite;
 }
-.info-label{
-font-size:9px;
-font-weight:700;
-color:var(--accent-dim);
-text-transform:uppercase;
-margin-bottom:6px;
-letter-spacing:1px;
+@keyframes move{
+from{transform:translateY(0);}
+to{transform:translateY(-1000px);}
 }
-.info-val{
-font-size:14px;
-font-weight:600;
+
+.container{
+width:100%;
+max-width:460px;
+padding:20px;
+}
+
+.card{
+background:var(--glass);
+backdrop-filter:blur(25px);
+border:1px solid var(--border);
+border-radius:30px;
+padding:35px;
+box-shadow:0 30px 80px rgba(0,0,0,.6);
+}
+
+h2{
+text-align:center;
+font-size:28px;
+font-weight:800;
+margin-bottom:25px;
+}
+
+h2 span{opacity:.4;font-weight:300;}
+
+input{
+width:100%;
+padding:18px;
+border-radius:18px;
+border:1px solid var(--border);
+background:rgba(255,255,255,0.02);
 color:#fff;
-overflow-x:auto;
-white-space:nowrap;
-padding-bottom:8px;
+text-align:center;
+margin-bottom:15px;
+outline:none;
 }
-#copyToast{
-position:fixed;
-bottom:30px;
+
+input:focus{
+border-color:rgba(255,255,255,0.25);
+}
+
+button{
+width:100%;
+padding:18px;
+border-radius:18px;
+border:none;
 background:#fff;
 color:#000;
-padding:12px 28px;
-border-radius:20px;
 font-weight:800;
-font-size:12px;
+cursor:pointer;
+text-transform:uppercase;
+}
+
+button:hover{
+transform:scale(1.03);
+}
+
+.profile{
 display:none;
-z-index:1000;
-box-shadow:0 20px 40px rgba(0,0,0,.5);
+animation:fade .5s ease;
 }
-footer{
-margin-top:35px;
-text-align:center;
-font-size:10px;
-color:var(--accent-dim);
-letter-spacing:1px;
-}
-footer b{color:#fff;}
-#resultView{display:none;}
-@keyframes slideUp{
-from{opacity:0;transform:translateY(20px);}
+
+@keyframes fade{
+from{opacity:0;transform:translateY(10px);}
 to{opacity:1;transform:translateY(0);}
+}
+
+.avatar{
+width:120px;
+height:120px;
+border-radius:35px;
+margin:auto;
+overflow:hidden;
+border:2px solid var(--border);
+display:flex;
+justify-content:center;
+align-items:center;
+}
+
+.avatar img{
+width:100%;
+height:100%;
+object-fit:cover;
+opacity:0;
+}
+
+.name{
+text-align:center;
+font-size:24px;
+font-weight:800;
+margin-top:15px;
+}
+
+.id{
+text-align:center;
+font-size:12px;
+opacity:.6;
+}
+
+.status{
+display:inline-block;
+padding:6px 14px;
+border-radius:20px;
+font-size:10px;
+margin:10px auto;
+display:flex;
+justify-content:center;
+width:max-content;
+}
+
+.online{background:rgba(16,185,129,.1);color:var(--green);}
+.offline{background:rgba(239,68,68,.1);color:var(--red);}
+
+.info{
+margin-top:20px;
+display:flex;
+flex-direction:column;
+gap:10px;
+}
+
+.box{
+padding:15px;
+border:1px solid var(--border);
+border-radius:16px;
+background:rgba(255,255,255,.02);
+cursor:pointer;
+}
+
+.box:hover{
+transform:scale(1.02);
+}
+
+.label{
+font-size:10px;
+opacity:.5;
+}
+
+.value{
+font-size:13px;
+font-weight:600;
+overflow:auto;
+}
+
+footer{
+text-align:center;
+margin-top:20px;
+font-size:10px;
+opacity:.5;
+}
+
+.toast{
+position:fixed;
+bottom:20px;
+background:#fff;
+color:#000;
+padding:10px 20px;
+border-radius:15px;
+display:none;
 }
 </style>
 </head>
 
 <body>
 
-<div id="copyToast">SUCCESSFULLY COPIED</div>
+<div class="particles" id="particles"></div>
 
 <div class="container">
 
-<div id="searchView" class="premium-card">
+<div class="card" id="searchBox">
 <h2>xat<span>Profile</span></h2>
-<input type="text" id="userInput" placeholder="ENTER ID OR NAME" autocomplete="off">
-<button class="btn-main" id="goBtn" onclick="fetchData()">Search Profile</button>
+<input id="userInput" placeholder="ENTER ID OR NAME">
+<button onclick="fetchData()">Search</button>
 </div>
 
-<div id="resultView" class="premium-card" style="animation:slideUp .6s ease;">
-<div class="profile-header">
-<div class="avatar-container">
-<img id="avatarImg" src="" alt="Avatar">
+<div class="card profile" id="profileBox">
+
+<div class="avatar">
+<img id="avatarImg">
 </div>
 
-<div id="statusBadge" class="status-badge">CHECKING</div>
-<div class="display-name" id="displayName">---</div>
-<div class="display-id" id="displayId">---</div>
+<div class="name" id="name">---</div>
+<div class="id" id="id">---</div>
+
+<div id="status" class="status">CHECK</div>
+
+<div class="info">
+
+<div class="box" onclick="copy('nick')">
+<div class="label">Nickname</div>
+<div class="value" id="nick">---</div>
 </div>
 
-<div class="info-grid">
-<div class="info-item" onclick="copyMe('nickVal')">
-<div class="info-label">Nickname</div>
-<div class="info-val" id="nickVal">---</div>
+<div class="box" onclick="copy('statusVal')">
+<div class="label">Status</div>
+<div class="value" id="statusVal">---</div>
 </div>
 
-<div class="info-item" onclick="copyMe('statusVal')">
-<div class="info-label">Status</div>
-<div class="info-val" id="statusVal">---</div>
+<div class="box" onclick="copy('avatar')">
+<div class="label">Avatar URL</div>
+<div class="value" id="avatar">---</div>
 </div>
 
-<div class="info-item" onclick="copyMe('avatarUrlVal')">
-<div class="info-label">Avatar</div>
-<div class="info-val" id="avatarUrlVal">---</div>
+<div class="box">
+<div class="label">BIO (NEW)</div>
+<div class="value">Elite X Profile System</div>
 </div>
 
-<div class="info-item" onclick="copyMe('xatframeVal')">
-<div class="info-label">xatframe</div>
-<div class="info-val" id="xatframeVal">---</div>
-</div>
 </div>
 
-<button class="btn-main" style="margin-top:25px;background:rgba(255,255,255,.05);color:#fff;border:1px solid var(--border);" onclick="location.reload()">New Search</button>
+<button onclick="location.reload()">New Search</button>
+
+<footer>Developer By <b>ramy</b></footer>
+
 </div>
 
-<footer>Developer By <b>RAMY</b></footer>
-
 </div>
+
+<div class="toast" id="toast">Copied</div>
 
 <script>
-const SECURE_API="https://xat-api-secure.karimadilv74.workers.dev/?u=";
+const API="https://xat-api-secure.karimadilv74.workers.dev/?u=";
 
-document.getElementById("userInput").addEventListener("keypress",function(e){
-if(e.key==="Enter") fetchData();
-});
+/* particles */
+for(let i=0;i<40;i++){
+let s=document.createElement("span");
+s.style.left=Math.random()*100+"%";
+s.style.top=Math.random()*100+"%";
+s.style.animationDuration=(10+Math.random()*20)+"s";
+document.getElementById("particles").appendChild(s);
+}
 
 async function fetchData(){
-const user=document.getElementById("userInput").value.trim();
-const btn=document.getElementById("goBtn");
-if(!user) return;
+let u=document.getElementById("userInput").value;
+if(!u) return;
 
-btn.innerHTML="SEARCHING...";
-btn.disabled=true;
+let res=await fetch(API+u);
+let d=await res.json();
 
-try{
-const response=await fetch(SECURE_API+encodeURIComponent(user));
-const data=await response.json();
+document.getElementById("searchBox").style.display="none";
+document.getElementById("profileBox").style.display="block";
 
-if(data&&(data.id||data.user_id)){
-const regID=data.user_id||data.id;
-const rawNickname=data.nickname||data.nick||user;
-const rawStatus=data.status||"N/A";
+document.getElementById("name").innerText=d.username||u;
+document.getElementById("id").innerText="ID: "+(d.id||"---");
 
-document.getElementById("displayName").innerText=data.username||user;
-document.getElementById("displayId").innerText="REG ID: "+regID;
+document.getElementById("nick").innerText=d.nickname||"---";
+document.getElementById("statusVal").innerText=d.status||"---";
 
-document.getElementById("nickVal").innerText=rawNickname;
-document.getElementById("statusVal").innerText=rawStatus;
+let img=d.avatar||"https://xat.com/images/default_avatar.png";
+document.getElementById("avatar").innerText=img;
 
-let avatarLink=data.avatar||"";
-let finalAvatar=avatarLink.split("#")[0]||"https://xat.com/images/default_avatar.png";
-document.getElementById("avatarUrlVal").innerText=finalAvatar;
+let a=document.getElementById("avatarImg");
+a.src=img;
+a.onload=()=>a.style.opacity=1;
 
-let rawFrame=data.xatframe||"";
-let cleanFrame="None Detected";
-
-if(rawFrame&&rawFrame.startsWith("http")){
-if(rawFrame.includes("github.io")){
-let parts=rawFrame.split("/");
-cleanFrame=parts.length>=4?parts[0]+"//"+parts[2]+"/"+parts[3]+"/":rawFrame;
-}else{
-cleanFrame=rawFrame;
-}
-}
-document.getElementById("xatframeVal").innerText=cleanFrame;
-
-const stBadge=document.getElementById("statusBadge");
-const isOnline=data.is_online===true||data.online==="Online";
-
-stBadge.innerText=isOnline?"Online":"Offline";
-stBadge.className="status-badge "+(isOnline?"online":"offline");
-
-document.getElementById("searchView").style.display="none";
-document.getElementById("resultView").style.display="block";
-
-const avatarImg=document.getElementById("avatarImg");
-const tempImg=new Image();
-
-tempImg.onload=function(){
-const existingStyle=document.getElementById("avatar-anim-style");
-if(existingStyle) existingStyle.remove();
-
-if(tempImg.width>tempImg.height*1.1){
-let frames=Math.round(tempImg.width/tempImg.height);
-
-avatarImg.src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
-avatarImg.classList.add("sprite-mode");
-avatarImg.style.backgroundImage=`url(${finalAvatar})`;
-avatarImg.style.backgroundSize=`${frames*100}% 100%`;
-
-const animName=`k_${Date.now()}`;
-const styleSheet=document.createElement("style");
-styleSheet.id="avatar-anim-style";
-styleSheet.innerHTML=`@keyframes ${animName}{from{background-position:0% 0%;}to{background-position:100% 0%;}}`;
-document.head.appendChild(styleSheet);
-
-avatarImg.style.animation=`${animName} ${frames*0.07}s steps(${frames-1}) infinite`;
-}else{
-avatarImg.classList.remove("sprite-mode");
-avatarImg.src=finalAvatar;
-avatarImg.style.animation="none";
+let st=document.getElementById("status");
+let online=d.is_online;
+st.innerText=online?"ONLINE":"OFFLINE";
+st.className="status "+(online?"online":"offline");
 }
 
-avatarImg.style.opacity="1";
-};
-
-tempImg.src=finalAvatar;
-
-}else{
-throw new Error();
-}
-}catch(e){
-alert("User not found or connection error.");
-}finally{
-btn.disabled=false;
-btn.innerHTML="Search Profile";
-}
-}
-
-function copyMe(id){
-const text=document.getElementById(id).innerText;
-if(text==="---"||text==="N/A"||text==="None Detected") return;
-
-navigator.clipboard.writeText(text);
-
-const toast=document.getElementById("copyToast");
+function copy(id){
+let t=document.getElementById(id).innerText;
+navigator.clipboard.writeText(t);
+let toast=document.getElementById("toast");
 toast.style.display="block";
-
-setTimeout(()=>{
-toast.style.display="none";
-},1500);
+setTimeout(()=>toast.style.display="none",1000);
 }
 </script>
 
