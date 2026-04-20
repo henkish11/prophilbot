@@ -2,22 +2,442 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Ramy Ultra Profile</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>xatProfile | Obsidian Elite</title>
+<link rel="icon" type="image/png" href="https://xatimg.com/image/8mgikUTBM7PK.png">
+<link rel="apple-touch-icon" href="https://xatimg.com/image/8mgikUTBM7PK.png">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif;}body{min-height:100vh;background:#05060a;color:#fff;overflow:hidden;display:flex;justify-content:center;align-items:center;}body::before{content:"RAMY";position:fixed;inset:0;display:flex;justify-content:center;align-items:center;font-size:14vw;font-weight:900;letter-spacing:10px;color:rgba(255,255,255,0.06);background:radial-gradient(circle at 20% 20%, rgba(0,255,213,0.15), transparent 40%),radial-gradient(circle at 80% 80%, rgba(124,92,255,0.15), transparent 45%),url('https://xatimg.com/image/NTKWfOtODi9Z.jpg');background-size:cover;background-position:center;filter:brightness(.55);z-index:-2;animation:zoom 18s infinite alternate;}@keyframes zoom{from{transform:scale(1);}to{transform:scale(1.08);}} .app{width:100%;max-width:1100px;height:100vh;display:flex;background:rgba(20,20,30,0.6);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.08);border-radius:22px;overflow:hidden;} .sidebar{width:240px;background:rgba(0,0,0,.35);padding:20px;display:flex;flex-direction:column;gap:10px;} .sidebar .myname{text-align:center;font-size:22px;font-weight:900;margin-bottom:10px;color:#fff;letter-spacing:1px;} .nav{padding:14px;border-radius:14px;cursor:pointer;text-align:center;background:rgba(255,255,255,.05);} .main{flex:1;padding:18px;overflow:auto;} .section{display:none}.active{display:block}.avatar{width:110px;height:110px;border-radius:28px;object-fit:cover;margin:10px auto 15px;display:block}.search{display:flex;gap:10px;margin-bottom:15px}.search input{flex:1;padding:14px;border:none;border-radius:14px;background:rgba(255,255,255,.06);color:#fff;text-align:center}.search button{padding:14px 18px;border:none;border-radius:14px;font-weight:800}.card{padding:15px;margin:10px 0;border-radius:14px;background:rgba(255,255,255,.05);cursor:pointer}#loginScreen{position:fixed;inset:0;display:flex;justify-content:center;align-items:center;background:rgba(0,0,0,.88);z-index:9999}.login-box{width:340px;padding:24px;border-radius:18px;background:rgba(20,20,30,.9);text-align:center}input{width:100%;padding:12px;border:none;border-radius:12px;text-align:center}#toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%);background:#fff;color:#000;padding:10px 18px;border-radius:10px;opacity:0;transition:.3s;font-weight:800}#toast.show{opacity:1;bottom:50px;}
+:root{
+--bg:#050507;
+--glass:rgba(15,15,20,0.8);
+--border:rgba(255,255,255,0.08);
+--accent:#ffffff;
+--accent-dim:#64748b;
+--success:#10b981;
+--error:#ef4444;
+}
+*{box-sizing:border-box;margin:0;padding:0;transition:all .5s cubic-bezier(.2,1,.3,1);}
+body{
+background:var(--bg);
+color:#fff;
+font-family:'Plus Jakarta Sans',sans-serif;
+display:flex;
+align-items:center;
+justify-content:center;
+min-height:100vh;
+overflow-x:hidden;
+overflow-y:auto;
+position:relative;
+padding:40px 0;
+}
+body::before{
+content:'';
+position:fixed;
+width:300px;
+height:300px;
+background:radial-gradient(circle,rgba(255,255,255,.05) 0%,transparent 70%);
+top:10%;
+left:10%;
+animation:float 15s infinite alternate;
+z-index:-1;
+}
+body::after{
+content:'';
+position:fixed;
+width:400px;
+height:400px;
+background:radial-gradient(circle,rgba(255,255,255,.03) 0%,transparent 70%);
+bottom:10%;
+right:10%;
+animation:float 20s infinite alternate-reverse;
+z-index:-1;
+}
+@keyframes float{
+from{transform:translate(0,0);}
+to{transform:translate(50px,100px);}
+}
+.container{
+width:100%;
+max-width:440px;
+padding:20px;
+position:relative;
+z-index:10;
+}
+.premium-card{
+background:var(--glass);
+backdrop-filter:blur(40px);
+-webkit-backdrop-filter:blur(40px);
+border:1px solid var(--border);
+border-radius:40px;
+padding:45px 40px;
+box-shadow:0 40px 100px rgba(0,0,0,.8);
+position:relative;
+overflow:hidden;
+}
+h2{
+font-weight:800;
+font-size:30px;
+letter-spacing:-1.5px;
+text-align:center;
+margin-bottom:35px;
+}
+h2 span{
+font-weight:300;
+opacity:.4;
+}
+input{
+width:100%;
+background:rgba(255,255,255,.02);
+border:1px solid var(--border);
+padding:22px;
+border-radius:24px;
+color:#fff;
+font-size:16px;
+outline:none;
+text-align:center;
+margin-bottom:20px;
+}
+input:focus{
+border-color:rgba(255,255,255,.2);
+background:rgba(255,255,255,.04);
+}
+.btn-main{
+width:100%;
+background:var(--accent);
+color:#000;
+padding:20px;
+border-radius:24px;
+border:none;
+font-weight:800;
+font-size:14px;
+cursor:pointer;
+text-transform:uppercase;
+letter-spacing:1px;
+}
+.profile-header{
+display:flex;
+flex-direction:column;
+align-items:center;
+margin-bottom:35px;
+}
+.avatar-container{
+width:130px;
+height:130px;
+border-radius:45px;
+padding:2px;
+background:linear-gradient(180deg,var(--border),transparent);
+margin-bottom:20px;
+overflow:hidden;
+position:relative;
+display:flex;
+align-items:center;
+justify-content:center;
+}
+#avatarImg{
+width:100%;
+height:100%;
+border-radius:43px;
+object-fit:cover;
+background:#000;
+opacity:0;
+transition:opacity .3s ease;
+}
+.sprite-mode{
+background-size:auto 100%!important;
+object-fit:none!important;
+background-repeat:no-repeat;
+background-position:0 0;
+}
+.status-badge{
+font-size:10px;
+font-weight:800;
+text-transform:uppercase;
+letter-spacing:2px;
+padding:8px 18px;
+border-radius:100px;
+margin-bottom:15px;
+border:1px solid transparent;
+display:flex;
+align-items:center;
+gap:6px;
+}
+.status-badge::before{
+content:'';
+width:6px;
+height:6px;
+border-radius:50%;
+display:inline-block;
+}
+.status-badge.online{
+background:rgba(16,185,129,.05);
+color:var(--success);
+border-color:rgba(16,185,129,.2);
+}
+.status-badge.online::before{
+background:var(--success);
+box-shadow:0 0 10px var(--success);
+animation:pulse 2s infinite;
+}
+.status-badge.offline{
+background:rgba(239,68,68,.05);
+color:var(--error);
+border-color:rgba(239,68,68,.2);
+}
+.status-badge.offline::before{
+background:var(--error);
+}
+@keyframes pulse{
+0%{transform:scale(1);opacity:1;}
+50%{transform:scale(1.5);opacity:.5;}
+100%{transform:scale(1);opacity:1;}
+}
+.display-name{
+font-size:26px;
+font-weight:800;
+margin-bottom:4px;
+letter-spacing:-.5px;
+text-align:center;
+}
+.display-id{
+font-size:12px;
+color:var(--accent-dim);
+font-weight:500;
+letter-spacing:1px;
+text-align:center;
+}
+.info-grid{
+display:flex;
+flex-direction:column;
+gap:12px;
+margin-top:20px;
+}
+.info-item{
+background:rgba(255,255,255,.01);
+border:1px solid var(--border);
+padding:18px 24px;
+border-radius:24px;
+cursor:pointer;
+position:relative;
+overflow:hidden;
+}
+.info-item:hover{
+background:rgba(255,255,255,.03);
+border-color:rgba(255,255,255,.2);
+transform:scale(1.02);
+}
+.info-label{
+font-size:9px;
+font-weight:700;
+color:var(--accent-dim);
+text-transform:uppercase;
+margin-bottom:6px;
+letter-spacing:1px;
+}
+.info-val{
+font-size:14px;
+font-weight:600;
+color:#fff;
+overflow-x:auto;
+white-space:nowrap;
+padding-bottom:8px;
+}
+#copyToast{
+position:fixed;
+bottom:30px;
+background:#fff;
+color:#000;
+padding:12px 28px;
+border-radius:20px;
+font-weight:800;
+font-size:12px;
+display:none;
+z-index:1000;
+box-shadow:0 20px 40px rgba(0,0,0,.5);
+}
+footer{
+margin-top:35px;
+text-align:center;
+font-size:10px;
+color:var(--accent-dim);
+letter-spacing:1px;
+}
+footer b{color:#fff;}
+#resultView{display:none;}
+@keyframes slideUp{
+from{opacity:0;transform:translateY(20px);}
+to{opacity:1;transform:translateY(0);}
+}
 </style>
 </head>
+
 <body>
-<div id="loginScreen"><div class="login-box"><h3>RAMY ACCESS</h3><input id="passInput" type="password" placeholder="Password" onkeydown="if(event.key==='Enter')checkPass()"></div></div>
-<div class="app"><div class="sidebar"><div class="myname">RAMY</div><div class="nav" onclick="show('home')">Search</div><div class="nav" onclick="show('history')">History</div><div class="nav" onclick="show('settings')">Settings</div></div><div class="main"><div id="home" class="section active"><img id="avatar" class="avatar"><div class="search"><input id="userInput" placeholder="Search ID or Name"><button onclick="fetchData()">Go</button></div><div class="card" onclick="copy('fullName')">Full Name: <span id="fullName"></span></div><div class="card" onclick="copy('id')">ID: <span id="id"></span></div><div class="card" onclick="copy('username')">Username: <span id="username"></span></div><div class="card" onclick="copy('imgLink')">Image: <span id="imgLink"></span></div></div><div id="history" class="section"><div id="historyBox"></div></div><div id="settings" class="section"><div class="card">All Data Preserved Successfully</div></div></div></div><div id="toast">Copied</div>
+
+<div id="copyToast">SUCCESSFULLY COPIED</div>
+
+<div class="container">
+
+<div id="searchView" class="premium-card">
+<h2>xat<span>Profile</span></h2>
+<input type="text" id="userInput" placeholder="ENTER ID OR NAME" autocomplete="off">
+<button class="btn-main" id="goBtn" onclick="fetchData()">Search Profile</button>
+</div>
+
+<div id="resultView" class="premium-card" style="animation:slideUp .6s ease;">
+<div class="profile-header">
+<div class="avatar-container">
+<img id="avatarImg" src="" alt="Avatar">
+</div>
+
+<div id="statusBadge" class="status-badge">CHECKING</div>
+<div class="display-name" id="displayName">---</div>
+<div class="display-id" id="displayId">---</div>
+</div>
+
+<div class="info-grid">
+<div class="info-item" onclick="copyMe('nickVal')">
+<div class="info-label">Nickname</div>
+<div class="info-val" id="nickVal">---</div>
+</div>
+
+<div class="info-item" onclick="copyMe('statusVal')">
+<div class="info-label">Status</div>
+<div class="info-val" id="statusVal">---</div>
+</div>
+
+<div class="info-item" onclick="copyMe('avatarUrlVal')">
+<div class="info-label">Avatar</div>
+<div class="info-val" id="avatarUrlVal">---</div>
+</div>
+
+<div class="info-item" onclick="copyMe('xatframeVal')">
+<div class="info-label">xatframe</div>
+<div class="info-val" id="xatframeVal">---</div>
+</div>
+</div>
+
+<button class="btn-main" style="margin-top:25px;background:rgba(255,255,255,.05);color:#fff;border:1px solid var(--border);" onclick="location.reload()">New Search</button>
+</div>
+
+<footer>Developer By <b>RAMY</b></footer>
+
+</div>
+
 <script>
-function show(id){document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');}
-function toast(msg){let t=document.getElementById('toast');t.innerText=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),1200);}function copy(id){let el=document.getElementById(id);navigator.clipboard.writeText(el.innerText);toast('Copied');}
-function checkPass(){if(passInput.value==='2035'){loginScreen.style.display='none';}else{alert('Wrong password');}}
-passInput.addEventListener('keypress',e=>{if(e.key==='Enter')checkPass();});userInput.addEventListener('keypress',e=>{if(e.key==='Enter')fetchData();});
-async function fetchData(){let u=userInput.value.trim();if(!u)return;let url=`https://xat-api-secure.karimadilv74.workers.dev/?u=${u}`;let proxy=`url`;try{let res=await fetch(url);let d=await res.json();fullName.innerText=d.name||'N/A';id.innerText=d.id||'N/A';username.innerText=d.nick||d.username||'N/A';imgLink.innerText=d.avatar||'N/A';avatar.src=d.avatar||'';}catch(e){toast('Error');}}
+const SECURE_API="https://xat-api-secure.karimadilv74.workers.dev/?u=";
+
+document.getElementById("userInput").addEventListener("keypress",function(e){
+if(e.key==="Enter") fetchData();
+});
+
+async function fetchData(){
+const user=document.getElementById("userInput").value.trim();
+const btn=document.getElementById("goBtn");
+if(!user) return;
+
+btn.innerHTML="SEARCHING...";
+btn.disabled=true;
+
+try{
+const response=await fetch(SECURE_API+encodeURIComponent(user));
+const data=await response.json();
+
+if(data&&(data.id||data.user_id)){
+const regID=data.user_id||data.id;
+const rawNickname=data.nickname||data.nick||user;
+const rawStatus=data.status||"N/A";
+
+document.getElementById("displayName").innerText=data.username||user;
+document.getElementById("displayId").innerText="REG ID: "+regID;
+
+document.getElementById("nickVal").innerText=rawNickname;
+document.getElementById("statusVal").innerText=rawStatus;
+
+let avatarLink=data.avatar||"";
+let finalAvatar=avatarLink.split("#")[0]||"https://xat.com/images/default_avatar.png";
+document.getElementById("avatarUrlVal").innerText=finalAvatar;
+
+let rawFrame=data.xatframe||"";
+let cleanFrame="None Detected";
+
+if(rawFrame&&rawFrame.startsWith("http")){
+if(rawFrame.includes("github.io")){
+let parts=rawFrame.split("/");
+cleanFrame=parts.length>=4?parts[0]+"//"+parts[2]+"/"+parts[3]+"/":rawFrame;
+}else{
+cleanFrame=rawFrame;
+}
+}
+document.getElementById("xatframeVal").innerText=cleanFrame;
+
+const stBadge=document.getElementById("statusBadge");
+const isOnline=data.is_online===true||data.online==="Online";
+
+stBadge.innerText=isOnline?"Online":"Offline";
+stBadge.className="status-badge "+(isOnline?"online":"offline");
+
+document.getElementById("searchView").style.display="none";
+document.getElementById("resultView").style.display="block";
+
+const avatarImg=document.getElementById("avatarImg");
+const tempImg=new Image();
+
+tempImg.onload=function(){
+const existingStyle=document.getElementById("avatar-anim-style");
+if(existingStyle) existingStyle.remove();
+
+if(tempImg.width>tempImg.height*1.1){
+let frames=Math.round(tempImg.width/tempImg.height);
+
+avatarImg.src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
+avatarImg.classList.add("sprite-mode");
+avatarImg.style.backgroundImage=`url(${finalAvatar})`;
+avatarImg.style.backgroundSize=`${frames*100}% 100%`;
+
+const animName=`k_${Date.now()}`;
+const styleSheet=document.createElement("style");
+styleSheet.id="avatar-anim-style";
+styleSheet.innerHTML=`@keyframes ${animName}{from{background-position:0% 0%;}to{background-position:100% 0%;}}`;
+document.head.appendChild(styleSheet);
+
+avatarImg.style.animation=`${animName} ${frames*0.07}s steps(${frames-1}) infinite`;
+}else{
+avatarImg.classList.remove("sprite-mode");
+avatarImg.src=finalAvatar;
+avatarImg.style.animation="none";
+}
+
+avatarImg.style.opacity="1";
+};
+
+tempImg.src=finalAvatar;
+
+}else{
+throw new Error();
+}
+}catch(e){
+alert("User not found or connection error.");
+}finally{
+btn.disabled=false;
+btn.innerHTML="Search Profile";
+}
+}
+
+function copyMe(id){
+const text=document.getElementById(id).innerText;
+if(text==="---"||text==="N/A"||text==="None Detected") return;
+
+navigator.clipboard.writeText(text);
+
+const toast=document.getElementById("copyToast");
+toast.style.display="block";
+
+setTimeout(()=>{
+toast.style.display="none";
+},1500);
+}
 </script>
+
 </body>
 </html>
