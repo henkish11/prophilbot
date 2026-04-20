@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>xatProfile | GOD MODE X</title>
+<title>xatProfile | ULTRA GOD SYSTEM</title>
 
 <link rel="icon" href="https://xatimg.com/image/8mgikUTBM7PK.png">
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
@@ -11,15 +11,15 @@
 <style>
 :root{
 --bg:#050507;
---glass:rgba(20,20,30,0.6);
+--glass:rgba(18,18,28,0.55);
 --border:rgba(255,255,255,0.08);
---accent:#fff;
+--accent:#ffffff;
+--neon:#7dd3fc;
 --green:#10b981;
 --red:#ef4444;
---blue:#60a5fa;
 }
 
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Plus Jakarta Sans';transition:.4s;}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Plus Jakarta Sans';transition:.35s;}
 
 body{
 background:var(--bg);
@@ -31,48 +31,49 @@ min-height:100vh;
 overflow:hidden;
 }
 
-/* background glow */
-.bg-glow{
+/* energy background */
+.energy{
 position:fixed;
-width:500px;
-height:500px;
-background:radial-gradient(circle,rgba(255,255,255,.06),transparent 70%);
-filter:blur(40px);
-top:10%;
-left:10%;
-animation:float 18s infinite alternate;
+width:600px;
+height:600px;
+background:radial-gradient(circle,rgba(125,211,252,.12),transparent 70%);
+filter:blur(60px);
+top:5%;
+left:5%;
+animation:move 18s infinite alternate;
 z-index:-1;
 }
-@keyframes float{
+@keyframes move{
 from{transform:translate(0,0);}
-to{transform:translate(80px,120px);}
+to{transform:translate(120px,140px);}
 }
 
 .container{
 width:100%;
-max-width:480px;
+max-width:520px;
 padding:20px;
 }
 
+/* MAIN CARD */
 .card{
 background:var(--glass);
-backdrop-filter:blur(30px);
+backdrop-filter:blur(35px);
 border:1px solid var(--border);
-border-radius:28px;
+border-radius:30px;
 padding:25px;
-box-shadow:0 30px 90px rgba(0,0,0,.7);
+box-shadow:0 40px 120px rgba(0,0,0,.8);
 }
 
+/* TITLE */
 h2{
 text-align:center;
-font-size:26px;
+font-size:28px;
 font-weight:800;
-margin-bottom:20px;
+margin-bottom:15px;
 }
-
 h2 span{opacity:.4;font-weight:300;}
 
-/* input */
+/* INPUT */
 input{
 width:100%;
 padding:16px;
@@ -82,9 +83,10 @@ background:rgba(255,255,255,.02);
 color:#fff;
 text-align:center;
 margin-bottom:10px;
+outline:none;
 }
 
-/* button */
+/* BUTTON */
 button{
 width:100%;
 padding:16px;
@@ -92,29 +94,28 @@ border-radius:14px;
 border:none;
 background:#fff;
 color:#000;
-font-weight:800;
+font-weight:900;
 cursor:pointer;
 }
-
 button:hover{transform:scale(1.03);}
 
 /* PROFILE */
-.profile{display:none;animation:fade .5s ease;}
-
+.profile{display:none;animation:fade .4s ease;}
 @keyframes fade{
-from{opacity:0;transform:translateY(10px);}
+from{opacity:0;transform:translateY(15px);}
 to{opacity:1;transform:translateY(0);}
 }
 
+/* AVATAR */
 .avatar{
-width:110px;
-height:110px;
+width:120px;
+height:120px;
 border-radius:30px;
 margin:auto;
 overflow:hidden;
 border:2px solid var(--border);
+box-shadow:0 0 30px rgba(125,211,252,.15);
 }
-
 .avatar img{
 width:100%;
 height:100%;
@@ -122,28 +123,40 @@ object-fit:cover;
 opacity:0;
 }
 
-.name{text-align:center;font-size:22px;font-weight:800;margin-top:10px;}
-.id{text-align:center;font-size:11px;opacity:.6;}
+/* NAME */
+.name{
+text-align:center;
+font-size:22px;
+font-weight:800;
+margin-top:10px;
+}
 
+.id{
+text-align:center;
+font-size:11px;
+opacity:.6;
+}
+
+/* STATUS */
 .status{
 margin:10px auto;
 padding:6px 14px;
 border-radius:20px;
 font-size:10px;
 width:max-content;
+font-weight:700;
 }
 
 .online{background:rgba(16,185,129,.1);color:var(--green);}
 .offline{background:rgba(239,68,68,.1);color:var(--red);}
 
-/* TABS */
+/* NAV TABS */
 .tabs{
 display:flex;
-justify-content:space-between;
 margin-top:15px;
-border:1px solid var(--border);
 border-radius:14px;
 overflow:hidden;
+border:1px solid var(--border);
 }
 
 .tab{
@@ -158,25 +171,28 @@ background:rgba(255,255,255,.02);
 .tab.active{
 background:#fff;
 color:#000;
-font-weight:800;
+font-weight:900;
 }
 
-/* sections */
-.section{display:none;margin-top:15px;}
-.section.active{display:block;}
+/* PANELS */
+.panel{display:none;margin-top:15px;}
+.panel.active{display:block;}
 
+/* BOX */
 .box{
 padding:12px;
-border:1px solid var(--border);
 border-radius:12px;
-margin-bottom:10px;
+border:1px solid var(--border);
 background:rgba(255,255,255,.02);
+margin-bottom:10px;
 cursor:pointer;
 }
+.box:hover{transform:scale(1.02);}
 
 .label{font-size:9px;opacity:.5;}
 .value{font-size:12px;font-weight:600;overflow:auto;}
 
+/* FOOTER */
 footer{
 text-align:center;
 margin-top:15px;
@@ -184,6 +200,7 @@ font-size:10px;
 opacity:.5;
 }
 
+/* TOAST */
 .toast{
 position:fixed;
 bottom:20px;
@@ -192,13 +209,14 @@ color:#000;
 padding:10px 18px;
 border-radius:12px;
 display:none;
+font-weight:800;
 }
 </style>
 </head>
 
 <body>
 
-<div class="bg-glow"></div>
+<div class="energy"></div>
 
 <div class="container">
 
@@ -206,7 +224,7 @@ display:none;
 <div class="card" id="searchBox">
 <h2>xat<span>Profile</span></h2>
 <input id="userInput" placeholder="ENTER ID OR NAME">
-<button onclick="fetchData()">SEARCH</button>
+<button onclick="loadProfile()">SEARCH SYSTEM</button>
 </div>
 
 <!-- PROFILE -->
@@ -219,17 +237,17 @@ display:none;
 <div class="name" id="name">---</div>
 <div class="id" id="id">---</div>
 
-<div id="status" class="status">CHECK</div>
+<div id="status" class="status">CHECKING</div>
 
-<!-- TABS -->
+<!-- NAV -->
 <div class="tabs">
-<div class="tab active" onclick="openTab(0)">PROFILE</div>
-<div class="tab" onclick="openTab(1)">INFO</div>
-<div class="tab" onclick="openTab(2)">EXTRA</div>
+<div class="tab active" onclick="openPanel(0)">PROFILE</div>
+<div class="tab" onclick="openPanel(1)">DATA</div>
+<div class="tab" onclick="openPanel(2)">SYSTEM</div>
 </div>
 
-<!-- PROFILE TAB -->
-<div class="section active">
+<!-- PANEL 1 -->
+<div class="panel active">
 <div class="box">
 <div class="label">Nickname</div>
 <div class="value" id="nick">---</div>
@@ -241,8 +259,8 @@ display:none;
 </div>
 </div>
 
-<!-- INFO TAB -->
-<div class="section">
+<!-- PANEL 2 -->
+<div class="panel">
 <div class="box">
 <div class="label">Avatar URL</div>
 <div class="value" id="avatar">---</div>
@@ -254,20 +272,25 @@ display:none;
 </div>
 </div>
 
-<!-- EXTRA TAB -->
-<div class="section">
+<!-- PANEL 3 -->
+<div class="panel">
 <div class="box">
-<div class="label">BIO</div>
-<div class="value">GOD MODE SYSTEM ACTIVE</div>
+<div class="label">SYSTEM</div>
+<div class="value">ULTRA GOD MODE ACTIVE</div>
 </div>
 
 <div class="box">
 <div class="label">Developer</div>
 <div class="value">ramy</div>
 </div>
+
+<div class="box">
+<div class="label">Engine</div>
+<div class="value">xatProfile v3 Core</div>
+</div>
 </div>
 
-<button onclick="location.reload()">NEW SEARCH</button>
+<button onclick="location.reload()">NEW QUERY</button>
 
 <footer>POWERED BY <b>ramy</b></footer>
 
@@ -280,18 +303,20 @@ display:none;
 <script>
 const API="https://xat-api-secure.karimadilv74.workers.dev/?u=";
 
-function openTab(i){
+/* tabs */
+function openPanel(i){
 let tabs=document.querySelectorAll(".tab");
-let sec=document.querySelectorAll(".section");
+let panels=document.querySelectorAll(".panel");
 
 tabs.forEach(t=>t.classList.remove("active"));
-sec.forEach(s=>s.classList.remove("active"));
+panels.forEach(p=>p.classList.remove("active"));
 
 tabs[i].classList.add("active");
-sec[i].classList.add("active");
+panels[i].classList.add("active");
 }
 
-async function fetchData(){
+/* load */
+async function loadProfile(){
 let u=document.getElementById("userInput").value;
 if(!u) return;
 
@@ -316,6 +341,7 @@ a.onload=()=>a.style.opacity=1;
 
 let st=document.getElementById("status");
 let online=d.is_online;
+
 st.innerText=online?"ONLINE":"OFFLINE";
 st.className="status "+(online?"online":"offline");
 }
