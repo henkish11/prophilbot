@@ -1,318 +1,174 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>xatProfile</title>
 
-<link rel="icon" type="image/png" href="https://xatimg.com/image/8mgikUTBM7PK.png">
-
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
-
-<style>
-:root {
---bg: #070816;
---glass: rgba(14, 16, 37, 0.85);
---border: rgba(100, 108, 255, 0.15);
---accent: #00e5ff;
---accent-dim: #9ca3af;
---success: #00ffa3;
---error: #f43f5e;
---vio: #707eff; 
-}
-
-* { box-sizing: border-box; margin: 0; padding: 0; transition: all 0.4s ease; }
-
-body {
-background: radial-gradient(circle at 50% -20%, rgba(0, 229, 255, 0.1), transparent 50%), #05050f;
-color: #fff;
-font-family: 'Plus Jakarta Sans', sans-serif;
-display: flex;
-align-items: center;
-justify-content: center;
-min-height: 100vh;
-overflow-x: hidden;
-padding: 40px 0;
-}
-
-.container { width: 100%; max-width: 440px; padding: 20px; }
-
-.premium-card {
-background: var(--glass);
-backdrop-filter: blur(40px);
-border: 1px solid var(--border);
-border-radius: 40px;
-padding: 45px 40px;
-box-shadow: 0 40px 100px rgba(0, 0, 0, 0.8);
-}
-
-.brand-title { text-align: center; margin-bottom: 30px; }
-
-.brand-title h1 {
-font-size: 48px;
-font-weight: 800;
-letter-spacing: -2px;
-background: linear-gradient(to right, #fff, var(--vio), var(--accent), var(--vio), #fff);
-background-size: 200% auto;
--webkit-background-clip: text;
--webkit-text-fill-color: transparent;
-animation: shineText 3s linear infinite;
-}
-
-@keyframes shineText { to { background-position: 200% center; } }
-
-input {
-width: 100%;
-background: rgba(0, 0, 0, 0.3);
-border: 1px solid var(--border);
-padding: 22px;
-border-radius: 24px;
-color: #fff;
-font-size: 16px;
-outline: none;
-text-align: center;
-margin-bottom: 20px;
-}
-
-.btn-main {
-width: 100%;
-background: var(--accent);
-color: #000;
-padding: 20px;
-border-radius: 24px;
-border: none;
-font-weight: 800;
-font-size: 14px;
-cursor: pointer;
-text-transform: uppercase;
-}
-
-.avatar-wrapper {
-width: 136px;
-height: 136px;
-border-radius: 50%;
-margin: 0 auto 20px;
-display: flex;
-align-items: center;
-justify-content: center;
-background: conic-gradient(from 0deg, transparent, var(--accent), var(--vio), transparent);
-animation: rotateFrame 3s linear infinite;
-}
-
-@keyframes rotateFrame {
-from { transform: rotate(0deg); }
-to { transform: rotate(360deg); }
-}
-
-.avatar-container {
-width: 128px;
-height: 128px;
-border-radius: 50%;
-background: #000;
-display: flex;
-align-items: center;
-justify-content: center;
-overflow: hidden;
-}
-
-#avatarImg {
-width: 100%;
-height: 100%;
-border-radius: 50%;
-object-fit: cover;
-opacity: 0;
-border: 4px solid #070816;
-}
-
-.status-badge {
-font-size: 10px;
-font-weight: 800;
-text-transform: uppercase;
-letter-spacing: 2px;
-padding: 8px 18px;
-border-radius: 100px;
-margin: 0 auto 15px;
-display: flex;
-width: fit-content;
-}
-
-.status-badge.online { color: var(--success); }
-.status-badge.offline { color: var(--error); }
-
-.display-name {
-font-size: 28px;
-font-weight: 800;
-text-align: center;
-text-transform: uppercase;
-}
-
-.display-id {
-font-size: 12px;
-color: var(--accent);
-text-align: center;
-margin-bottom: 25px;
-}
-
-.info-grid { display: flex; flex-direction: column; gap: 12px; }
-
-.info-item {
-background: rgba(255, 255, 255, 0.02);
-border: 1px solid var(--border);
-padding: 18px;
-border-radius: 24px;
-cursor: pointer;
-}
-
-.info-label {
-font-size: 9px;
-color: var(--accent-dim);
-margin-bottom: 6px;
-}
-
-.info-val {
-font-size: 14px;
-color: var(--vio);
-}
-
-footer {
-margin-top: 30px;
-text-align: center;
-font-size: 11px;
-color: var(--accent-dim);
-}
-
-footer b { color: var(--accent); }
-</style>
-</head>
-
-<body>
-
-<div class="container">
-
-<div id="searchView" class="premium-card">
-
-<div class="brand-title">
-<h1>xatProfile</h1>
-</div>
-
-<input type="text" id="userInput" placeholder="ENTER ID OR NAME" autocomplete="off">
-
-<!-- ✅ FIXED BUTTON -->
-<button class="btn-main" id="goBtn" type="button" onclick="fetchData()">Search Profile</button>
-
-</div>
-
-<div id="resultView" class="premium-card" style="display:none;">
-
-<div class="avatar-wrapper">
-<div class="avatar-container">
-<img id="avatarImg" src="" alt="Avatar">
-</div>
-</div>
-
-<div id="statusBadge" class="status-badge">CHECKING</div>
-
-<div class="display-name" id="displayName">---</div>
-<div class="display-id" id="displayId">---</div>
-
-<div class="info-grid">
-<div class="info-item" onclick="copyMe('nickVal')">
-<div class="info-label">Nickname</div>
-<div class="info-val" id="nickVal">---</div>
-</div>
-
-<div class="info-item" onclick="copyMe('statusVal')">
-<div class="info-label">Status</div>
-<div class="info-val" id="statusVal">---</div>
-</div>
-
-<div class="info-item" onclick="copyMe('avatarUrlVal')">
-<div class="info-label">Avatar</div>
-<div class="info-val" id="avatarUrlVal">---</div>
-</div>
-
-<div class="info-item" onclick="copyMe('xatframeVal')">
-<div class="info-label">xatframe / hp</div>
-<div class="info-val" id="xatframeVal">---</div>
-</div>
-</div>
-
-<button class="btn-main" style="margin-top: 25px; background: rgba(255,255,255,0.05); color: #fff; border: 1px solid var(--border);" onclick="location.reload()">New Search</button>
-
-</div>
-
-<footer>Developer By <b>KEMO</b> // <b>TIRO</b></footer>
-
-</div>
-
-<script>
-const SECURE_API = "https://xat-api-secure.karimadilv74.workers.dev/?u=";
-
-/* ✅ FIX ENTER */
-document.getElementById('userInput').addEventListener('keydown', function (e) {
-    if (e.key === 'Enter') {
-        e.preventDefault();
-        fetchData();
+<!DOCTYPE html><html lang="en"><head>    <meta charset="UTF-8">    <meta name="viewport" content="width=device-width, initial-scale=1.0">    <title>xatProfile</title>    <link rel="icon" type="image/png" href="https://xatimg.com/image/8mgikUTBM7PK.png">    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">    <style>        
+    :root {            
+        --bg: #070816;            
+        --glass: rgba(14, 16, 37, 0.85);            
+        --border: rgba(100, 108, 255, 0.15);            
+        --accent: #00e5ff;            
+        --accent-dim: #9ca3af;            
+        --success: #00ffa3;            
+        --error: #f43f5e;
+        --vio: #707eff; 
+    }        
+    * { box-sizing: border-box; margin: 0; padding: 0; transition: all 0.4s ease; }        
+    body {            
+        background: radial-gradient(circle at 50% -20%, rgba(0, 229, 255, 0.1), transparent 50%), #05050f;
+        color: #fff; font-family: 'Plus Jakarta Sans', sans-serif;            
+        display: flex; align-items: center; justify-content: center; min-height: 100vh;            
+        overflow-x: hidden; position: relative; padding: 40px 0;        
+    }        
+    .container { width: 100%; max-width: 440px; padding: 20px; position: relative; z-index: 10; }        
+    .premium-card {            
+        background: var(--glass); backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px);            
+        border: 1px solid var(--border); border-radius: 40px; padding: 45px 40px;            
+        box-shadow: 0 40px 100px rgba(0, 0, 0, 0.8); position: relative;        
+    }        
+    .brand-title { text-align: center; margin-bottom: 30px; }
+    .brand-title h1 { 
+        font-size: 48px; font-weight: 800; letter-spacing: -2px;
+        background: linear-gradient(to right, #fff, var(--vio), var(--accent), var(--vio), #fff);
+        background-size: 200% auto;
+        -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        animation: shineText 3s linear infinite;
     }
-});
-
-async function fetchData() {
-    const user = document.getElementById('userInput').value.trim();
-    const btn = document.getElementById('goBtn');
-
-    if (!user) return;
-
-    btn.innerText = "SEARCHING...";
-    btn.disabled = true;
-
-    try {
-        const response = await fetch(SECURE_API + encodeURIComponent(user));
-        const data = await response.json();
-
-        document.getElementById('searchView').style.display = 'none';
-        document.getElementById('resultView').style.display = 'block';
-
-         // 👇 ضيف ده هنا
-         document.getElementById('avatarImg').onload = function () {
-         this.style.opacity = '1';
-         };
-
-        // reset avatar opacity كل مرة
-        document.getElementById('avatarImg').style.opacity = '0';
-
-        document.getElementById('displayName').innerText = data.username || user;
-        document.getElementById('displayId').innerText = "REG ID: " + (data.user_id || data.id);
-
-        document.getElementById('nickVal').innerText = data.nickname || data.nick || user;
-        document.getElementById('statusVal').innerText = data.status || "N/A";
-
-        let avatar = (data.avatar || "").split('#')[0] || 'https://xat.com/images/default_avatar.png';
-
-        document.getElementById('avatarUrlVal').innerText = avatar;
-        document.getElementById('xatframeVal').innerText = data.xatframe || data.homepage || "---";
-
-        const isOnline = data.is_online === true || data.online === "Online";
-        const stBadge = document.getElementById('statusBadge');
-        stBadge.innerText = isOnline ? "Online" : "Offline";
-        stBadge.className = "status-badge " + (isOnline ? "online" : "offline");
-
-        const avatarImg = document.getElementById('avatarImg');
-        avatarImg.src = avatar;
-        avatarImg.style.opacity = '1';
-
-    } catch (e) {
-        alert("User Not Found");
-    } finally {
-        btn.innerText = "Search Profile";
-        btn.disabled = false;
+    @keyframes shineText { to { background-position: 200% center; } }
+    .brand-title p { font-size: 11px; font-weight: 700; color: var(--accent-dim); letter-spacing: 4px; text-transform: uppercase; margin-top: -5px; }
+    input {            
+        width: 100%; background: rgba(0, 0, 0, 0.3); border: 1px solid var(--border);            
+        padding: 22px; border-radius: 24px; color: #fff; font-size: 16px; outline: none; text-align: center; margin-bottom: 20px;        
+    }        
+    .btn-main {            
+        width: 100%; background: var(--accent); color: #000; padding: 20px; border-radius: 24px;            
+        border: none; font-weight: 800; font-size: 14px; cursor: pointer; text-transform: uppercase;        
+    }        
+    .avatar-wrapper {
+        width: 136px; height: 136px; border-radius: 50%; position: relative;
+        display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;
+        background: conic-gradient(from 0deg, transparent, var(--accent), var(--vio), transparent);
+        animation: rotateFrame 3s linear infinite;
     }
-}
+    @keyframes rotateFrame { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    .avatar-container {            
+        width: 128px; height: 128px; border-radius: 50%; background: #000;
+        display: flex; align-items: center; justify-content: center; overflow: hidden;
+        animation: counterRotate 3s linear infinite; z-index: 2;
+    }        
+    @keyframes counterRotate { from { transform: rotate(0deg); } to { transform: rotate(-360deg); } }
+    #avatarImg { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; opacity: 0; border: 4px solid #070816; }        
+    .sprite-mode { background-size: auto 100% !important; object-fit: none !important; background-repeat: no-repeat; background-position: 0 0; }        
+    .status-badge {            
+        font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px;            
+        padding: 8px 18px; border-radius: 100px; margin: 0 auto 15px; border: 1px solid transparent; display: flex; align-items: center; gap: 8px; width: fit-content;
+    }        
+    .status-badge::before { content: ''; width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+    .status-badge.online { background: rgba(0, 255, 163, 0.05); color: var(--success); border-color: rgba(0, 255, 163, 0.2); }        
+    .status-badge.online::before { background: var(--success); box-shadow: 0 0 10px var(--success); animation: pulse 2s infinite; }
+    .status-badge.offline { background: rgba(244, 63, 94, 0.05); color: var(--error); border-color: rgba(244, 63, 94, 0.2); }        
+    .status-badge.offline::before { background: var(--error); }
+    @keyframes pulse { 0% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.3); opacity: 0.6; } 100% { transform: scale(1); opacity: 1; } }
+    .display-name { font-size: 28px; font-weight: 800; text-align: center; text-transform: uppercase; }        
+    .display-id { font-size: 12px; color: var(--accent); font-weight: 700; text-align: center; margin-bottom: 25px; }        
+    .info-grid { display: flex; flex-direction: column; gap: 12px; }        
+    .info-item { background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border); padding: 18px 24px; border-radius: 24px; cursor: pointer; }        
+    .info-label { font-size: 9px; font-weight: 700; color: var(--accent-dim); text-transform: uppercase; margin-bottom: 6px; }        
+    
+  
+    .info-val { 
+        font-size: 14px; font-weight: 600; color: var(--vio); 
+        overflow-x: auto; white-space: nowrap; padding-bottom: 8px; 
+        cursor: grab;
+    }        
+    .info-val:active { cursor: grabbing; }
 
-function copyMe(id) {
-    const text = document.getElementById(id).innerText;
-    if (text !== "---") navigator.clipboard.writeText(text);
-}
-</script>
+    
+    .info-val::-webkit-scrollbar { height: 6px; }
+    .info-val::-webkit-scrollbar-track { background: transparent; }
+    .info-val::-webkit-scrollbar-thumb { 
+        background: rgba(255, 255, 255, 0.08); 
+        border-radius: 10px;
+    }
+    .info-val:hover::-webkit-scrollbar-thumb { 
+        background: rgba(0, 229, 255, 0.3); 
+    }
 
-</body>
+    footer { margin-top: 35px; text-align: center; font-size: 10px; color: var(--accent-dim); letter-spacing: 1px; }        
+    footer b { color: var(--accent); }        
+    </style></head>
+    <body>
+        <div class="container">
+            <div id="searchView" class="premium-card">
+                <div class="brand-title">
+                    <h1>xatProfile</h1>
+                </div>
+                <input type="text" id="userInput" placeholder="ENTER ID OR NAME" autocomplete="off">
+                <button class="btn-main" id="goBtn" onclick="fetchData()">Search Profile</button>
+            </div>
+            <div id="resultView" class="premium-card" style="display:none;">
+                <div class="avatar-wrapper"><div class="avatar-container"><img id="avatarImg" src="" alt="Avatar"></div></div>
+                <div id="statusBadge" class="status-badge">CHECKING</div>
+                <div class="display-name" id="displayName">---</div>
+                <div class="display-id" id="displayId">---</div>
+                <div class="info-grid">
+                    <div class="info-item" onclick="copyMe('nickVal')"><div class="info-label">Nickname</div><div class="info-val" id="nickVal">---</div></div>
+                    <div class="info-item" onclick="copyMe('statusVal')"><div class="info-label">Status</div><div class="info-val" id="statusVal">---</div></div>
+                    <div class="info-item" onclick="copyMe('avatarUrlVal')"><div class="info-label">Avatar</div><div class="info-val" id="avatarUrlVal">---</div></div>
+                    <div class="info-item" onclick="copyMe('xatframeVal')"><div class="info-label">xatframe / hp</div><div class="info-val" id="xatframeVal">---</div></div>
+                </div>
+                <button class="btn-main" style="margin-top: 25px; background: rgba(255,255,255,0.05); color: #fff; border: 1px solid var(--border);" onclick="location.reload()">New Search</button>
+            </div>
+            <footer>Developer By <b>KEMO</b> // <b>TIRO</b></footer>
+        </div>
+        <script>
+            const SECURE_API = "https://xat-api-secure.karimadilv74.workers.dev/?u=";
+            document.getElementById('userInput').addEventListener('keypress', function (e) { if (e.key === 'Enter') fetchData(); });
+            async function fetchData() {
+                const user = document.getElementById('userInput').value.trim();
+                const btn = document.getElementById('goBtn');
+                if(!user) return;
+                btn.innerText = "SEARCHING...";
+                btn.disabled = true;
+                try {
+                    const response = await fetch(SECURE_API + encodeURIComponent(user));
+                    const data = await response.json();
+                    if (data && (data.id || data.user_id)) {
+                        document.getElementById('displayName').innerText = data.username || user;
+                        document.getElementById('displayId').innerText = "REG ID: " + (data.user_id || data.id);
+                        document.getElementById('nickVal').innerText = data.nickname || data.nick || user;
+                        document.getElementById('statusVal').innerText = data.status || "N/A";
+                        let avatar = (data.avatar || "").split('#')[0] || 'https://xat.com/images/default_avatar.png';
+                        document.getElementById('avatarUrlVal').innerText = avatar;
+                        document.getElementById('xatframeVal').innerText = data.xatframe || data.homepage || "---";
+                        const isOnline = data.is_online === true || data.online === "Online";
+                        const stBadge = document.getElementById('statusBadge');
+                        stBadge.innerText = isOnline ? "Online" : "Offline";
+                        stBadge.className = "status-badge " + (isOnline ? "online" : "offline");
+                        document.getElementById('searchView').style.display = 'none';
+                        document.getElementById('resultView').style.display = 'block';
+                        const avatarImg = document.getElementById('avatarImg');
+                        const tempImg = new Image();
+                        tempImg.onload = function() {
+                            if (tempImg.width > tempImg.height * 1.1) {
+                                let frames = Math.round(tempImg.width / tempImg.height);
+                                avatarImg.src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
+                                avatarImg.classList.add('sprite-mode');
+                                avatarImg.style.backgroundImage = `url(${avatar})`;
+                                avatarImg.style.backgroundSize = `${frames * 100}% 100%`;
+                                const animName = `k_${Date.now()}`;
+                                const styleSheet = document.createElement('style');
+                                styleSheet.innerHTML = `@keyframes ${animName} { from { background-position: 0% 0%; } to { background-position: 100% 0%; } }`;
+                                document.head.appendChild(styleSheet);
+                                avatarImg.style.animation = `${animName} ${frames * 0.07}s steps(${frames - 1}) infinite`;
+                            } else { avatarImg.classList.remove('sprite-mode'); avatarImg.src = avatar; avatarImg.style.animation = "none"; }
+                            avatarImg.style.opacity = '1';
+                        };
+                        tempImg.src = avatar;
+                    }
+                } catch (e) { alert("User Not Found"); } finally { btn.innerText = "Search Profile"; btn.disabled = false; }
+            }
+            function copyMe(id) {
+                const text = document.getElementById(id).innerText;
+                if(text !== "---") navigator.clipboard.writeText(text);
+            }
+        </script>
+    </body>
 </html>
