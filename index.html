@@ -226,11 +226,24 @@ fetchData();
 
 async function fetchData(){
 
+try {
+
 let user=document.getElementById('userInput').value.trim();
 if(!user) return;
 
-let res=await fetch(SECURE_API+user);
+let res=await fetch(SECURE_API+encodeURIComponent(user));
+
+if(!res.ok){
+alert("API Error");
+return;
+}
+
 let data=await res.json();
+
+if(!data){
+alert("No Data Found");
+return;
+}
 
 document.getElementById('searchView').style.display='none';
 document.getElementById('resultView').style.display='block';
@@ -245,6 +258,12 @@ document.getElementById('xatframeVal').innerText=data.xatframe||"-";
 
 document.getElementById('avatarImg').src=data.avatar||"";
 document.getElementById('avatarImg').style.opacity=1;
+
+} catch(err){
+console.log(err);
+alert("Fetch Failed - Check API");
+}
+
 }
 </script>
 
