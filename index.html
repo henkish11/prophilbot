@@ -1,174 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RAMY LOOKUP</title>
 
-<!DOCTYPE html><html lang="en"><head>    <meta charset="UTF-8">    <meta name="viewport" content="width=device-width, initial-scale=1.0">    <title>xatProfile</title>    <link rel="icon" type="image/png" href="https://xatimg.com/image/8mgikUTBM7PK.png">    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">    <style>        
-    :root {            
-        --bg: #070816;            
-        --glass: rgba(14, 16, 37, 0.85);            
-        --border: rgba(100, 108, 255, 0.15);            
-        --accent: #00e5ff;            
-        --accent-dim: #9ca3af;            
-        --success: #00ffa3;            
-        --error: #f43f5e;
-        --vio: #707eff; 
-    }        
-    * { box-sizing: border-box; margin: 0; padding: 0; transition: all 0.4s ease; }        
-    body {            
-        background: radial-gradient(circle at 50% -20%, rgba(0, 229, 255, 0.1), transparent 50%), #05050f;
-        color: #fff; font-family: 'Plus Jakarta Sans', sans-serif;            
-        display: flex; align-items: center; justify-content: center; min-height: 100vh;            
-        overflow-x: hidden; position: relative; padding: 40px 0;        
-    }        
-    .container { width: 100%; max-width: 440px; padding: 20px; position: relative; z-index: 10; }        
-    .premium-card {            
-        background: var(--glass); backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px);            
-        border: 1px solid var(--border); border-radius: 40px; padding: 45px 40px;            
-        box-shadow: 0 40px 100px rgba(0, 0, 0, 0.8); position: relative;        
-    }        
-    .brand-title { text-align: center; margin-bottom: 30px; }
-    .brand-title h1 { 
-        font-size: 48px; font-weight: 800; letter-spacing: -2px;
-        background: linear-gradient(to right, #fff, var(--vio), var(--accent), var(--vio), #fff);
-        background-size: 200% auto;
-        -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-        animation: shineText 3s linear infinite;
-    }
-    @keyframes shineText { to { background-position: 200% center; } }
-    .brand-title p { font-size: 11px; font-weight: 700; color: var(--accent-dim); letter-spacing: 4px; text-transform: uppercase; margin-top: -5px; }
-    input {            
-        width: 100%; background: rgba(0, 0, 0, 0.3); border: 1px solid var(--border);            
-        padding: 22px; border-radius: 24px; color: #fff; font-size: 16px; outline: none; text-align: center; margin-bottom: 20px;        
-    }        
-    .btn-main {            
-        width: 100%; background: var(--accent); color: #000; padding: 20px; border-radius: 24px;            
-        border: none; font-weight: 800; font-size: 14px; cursor: pointer; text-transform: uppercase;        
-    }        
-    .avatar-wrapper {
-        width: 136px; height: 136px; border-radius: 50%; position: relative;
-        display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;
-        background: conic-gradient(from 0deg, transparent, var(--accent), var(--vio), transparent);
-        animation: rotateFrame 3s linear infinite;
-    }
-    @keyframes rotateFrame { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-    .avatar-container {            
-        width: 128px; height: 128px; border-radius: 50%; background: #000;
-        display: flex; align-items: center; justify-content: center; overflow: hidden;
-        animation: counterRotate 3s linear infinite; z-index: 2;
-    }        
-    @keyframes counterRotate { from { transform: rotate(0deg); } to { transform: rotate(-360deg); } }
-    #avatarImg { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; opacity: 0; border: 4px solid #070816; }        
-    .sprite-mode { background-size: auto 100% !important; object-fit: none !important; background-repeat: no-repeat; background-position: 0 0; }        
-    .status-badge {            
-        font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px;            
-        padding: 8px 18px; border-radius: 100px; margin: 0 auto 15px; border: 1px solid transparent; display: flex; align-items: center; gap: 8px; width: fit-content;
-    }        
-    .status-badge::before { content: ''; width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
-    .status-badge.online { background: rgba(0, 255, 163, 0.05); color: var(--success); border-color: rgba(0, 255, 163, 0.2); }        
-    .status-badge.online::before { background: var(--success); box-shadow: 0 0 10px var(--success); animation: pulse 2s infinite; }
-    .status-badge.offline { background: rgba(244, 63, 94, 0.05); color: var(--error); border-color: rgba(244, 63, 94, 0.2); }        
-    .status-badge.offline::before { background: var(--error); }
-    @keyframes pulse { 0% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.3); opacity: 0.6; } 100% { transform: scale(1); opacity: 1; } }
-    .display-name { font-size: 28px; font-weight: 800; text-align: center; text-transform: uppercase; }        
-    .display-id { font-size: 12px; color: var(--accent); font-weight: 700; text-align: center; margin-bottom: 25px; }        
-    .info-grid { display: flex; flex-direction: column; gap: 12px; }        
-    .info-item { background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border); padding: 18px 24px; border-radius: 24px; cursor: pointer; }        
-    .info-label { font-size: 9px; font-weight: 700; color: var(--accent-dim); text-transform: uppercase; margin-bottom: 6px; }        
-    
-  
-    .info-val { 
-        font-size: 14px; font-weight: 600; color: var(--vio); 
-        overflow-x: auto; white-space: nowrap; padding-bottom: 8px; 
-        cursor: grab;
-    }        
-    .info-val:active { cursor: grabbing; }
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
 
-    
-    .info-val::-webkit-scrollbar { height: 6px; }
-    .info-val::-webkit-scrollbar-track { background: transparent; }
-    .info-val::-webkit-scrollbar-thumb { 
-        background: rgba(255, 255, 255, 0.08); 
-        border-radius: 10px;
-    }
-    .info-val:hover::-webkit-scrollbar-thumb { 
-        background: rgba(0, 229, 255, 0.3); 
-    }
+<style>
+body{
+margin:0;
+font-family:'Plus Jakarta Sans',sans-serif;
+background:#05050f;
+color:#fff;
+display:flex;
+justify-content:center;
+align-items:center;
+min-height:100vh;
+}
 
-    footer { margin-top: 35px; text-align: center; font-size: 10px; color: var(--accent-dim); letter-spacing: 1px; }        
-    footer b { color: var(--accent); }        
-    </style></head>
-    <body>
-        <div class="container">
-            <div id="searchView" class="premium-card">
-                <div class="brand-title">
-                    <h1>xatProfile</h1>
-                </div>
-                <input type="text" id="userInput" placeholder="ENTER ID OR NAME" autocomplete="off">
-                <button class="btn-main" id="goBtn" onclick="fetchData()">Search Profile</button>
-            </div>
-            <div id="resultView" class="premium-card" style="display:none;">
-                <div class="avatar-wrapper"><div class="avatar-container"><img id="avatarImg" src="" alt="Avatar"></div></div>
-                <div id="statusBadge" class="status-badge">CHECKING</div>
-                <div class="display-name" id="displayName">---</div>
-                <div class="display-id" id="displayId">---</div>
-                <div class="info-grid">
-                    <div class="info-item" onclick="copyMe('nickVal')"><div class="info-label">Nickname</div><div class="info-val" id="nickVal">---</div></div>
-                    <div class="info-item" onclick="copyMe('statusVal')"><div class="info-label">Status</div><div class="info-val" id="statusVal">---</div></div>
-                    <div class="info-item" onclick="copyMe('avatarUrlVal')"><div class="info-label">Avatar</div><div class="info-val" id="avatarUrlVal">---</div></div>
-                    <div class="info-item" onclick="copyMe('xatframeVal')"><div class="info-label">xatframe / hp</div><div class="info-val" id="xatframeVal">---</div></div>
-                </div>
-                <button class="btn-main" style="margin-top: 25px; background: rgba(255,255,255,0.05); color: #fff; border: 1px solid var(--border);" onclick="location.reload()">New Search</button>
-            </div>
-            <footer>Developer By <b>KEMO</b> // <b>TIRO</b></footer>
-        </div>
-        <script>
-            const SECURE_API = "https://xat-api-secure.karimadilv74.workers.dev/?u=";
-            document.getElementById('userInput').addEventListener('keypress', function (e) { if (e.key === 'Enter') fetchData(); });
-            async function fetchData() {
-                const user = document.getElementById('userInput').value.trim();
-                const btn = document.getElementById('goBtn');
-                if(!user) return;
-                btn.innerText = "SEARCHING...";
-                btn.disabled = true;
-                try {
-                    const response = await fetch(SECURE_API + encodeURIComponent(user));
-                    const data = await response.json();
-                    if (data && (data.id || data.user_id)) {
-                        document.getElementById('displayName').innerText = data.username || user;
-                        document.getElementById('displayId').innerText = "REG ID: " + (data.user_id || data.id);
-                        document.getElementById('nickVal').innerText = data.nickname || data.nick || user;
-                        document.getElementById('statusVal').innerText = data.status || "N/A";
-                        let avatar = (data.avatar || "").split('#')[0] || 'https://xat.com/images/default_avatar.png';
-                        document.getElementById('avatarUrlVal').innerText = avatar;
-                        document.getElementById('xatframeVal').innerText = data.xatframe || data.homepage || "---";
-                        const isOnline = data.is_online === true || data.online === "Online";
-                        const stBadge = document.getElementById('statusBadge');
-                        stBadge.innerText = isOnline ? "Online" : "Offline";
-                        stBadge.className = "status-badge " + (isOnline ? "online" : "offline");
-                        document.getElementById('searchView').style.display = 'none';
-                        document.getElementById('resultView').style.display = 'block';
-                        const avatarImg = document.getElementById('avatarImg');
-                        const tempImg = new Image();
-                        tempImg.onload = function() {
-                            if (tempImg.width > tempImg.height * 1.1) {
-                                let frames = Math.round(tempImg.width / tempImg.height);
-                                avatarImg.src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
-                                avatarImg.classList.add('sprite-mode');
-                                avatarImg.style.backgroundImage = `url(${avatar})`;
-                                avatarImg.style.backgroundSize = `${frames * 100}% 100%`;
-                                const animName = `k_${Date.now()}`;
-                                const styleSheet = document.createElement('style');
-                                styleSheet.innerHTML = `@keyframes ${animName} { from { background-position: 0% 0%; } to { background-position: 100% 0%; } }`;
-                                document.head.appendChild(styleSheet);
-                                avatarImg.style.animation = `${animName} ${frames * 0.07}s steps(${frames - 1}) infinite`;
-                            } else { avatarImg.classList.remove('sprite-mode'); avatarImg.src = avatar; avatarImg.style.animation = "none"; }
-                            avatarImg.style.opacity = '1';
-                        };
-                        tempImg.src = avatar;
-                    }
-                } catch (e) { alert("User Not Found"); } finally { btn.innerText = "Search Profile"; btn.disabled = false; }
-            }
-            function copyMe(id) {
-                const text = document.getElementById(id).innerText;
-                if(text !== "---") navigator.clipboard.writeText(text);
-            }
-        </script>
-    </body>
+.container{
+width:420px;
+}
+
+.card{
+background:rgba(14,16,37,0.85);
+padding:30px;
+border-radius:25px;
+backdrop-filter:blur(20px);
+border:1px solid rgba(100,108,255,0.15);
+box-shadow:0 30px 80px rgba(0,0,0,0.6);
+}
+
+h1{
+text-align:center;
+margin-bottom:20px;
+color:#00e5ff;
+}
+
+input{
+width:100%;
+padding:18px;
+border-radius:15px;
+border:none;
+outline:none;
+text-align:center;
+margin-bottom:15px;
+font-size:16px;
+}
+
+button{
+width:100%;
+padding:18px;
+border:none;
+border-radius:15px;
+background:#00e5ff;
+font-weight:bold;
+cursor:pointer;
+}
+
+.profile{
+display:none;
+margin-top:20px;
+text-align:center;
+}
+
+.avatar{
+width:120px;
+height:120px;
+border-radius:50%;
+margin:auto;
+overflow:hidden;
+border:3px solid #00e5ff;
+}
+
+.avatar img{
+width:100%;
+height:100%;
+object-fit:cover;
+}
+
+.info{
+margin-top:15px;
+font-size:14px;
+line-height:1.6;
+}
+
+.badge{
+margin-top:10px;
+padding:5px 15px;
+border-radius:20px;
+display:inline-block;
+font-size:12px;
+}
+
+.online{background:#00ffa3;color:#000;}
+.offline{background:#f43f5e;color:#fff;}
+
+.loading{
+display:none;
+text-align:center;
+margin-top:15px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+<div class="card">
+
+<h1>RAMY LOOKUP</h1>
+
+<input type="text" id="userInput" placeholder="Enter ID or Name">
+
+<button onclick="search()">SEARCH</button>
+
+<div class="loading" id="loading">Searching...</div>
+
+<div class="profile" id="profile">
+
+<div class="avatar">
+<img id="avatar" src="">
+</div>
+
+<h2 id="name">---</h2>
+
+<div class="badge" id="status">---</div>
+
+<div class="info">
+<p>ID: <span id="id"></span></p>
+<p>Nick: <span id="nick"></span></p>
+<p>Status: <span id="stat"></span></p>
+</div>
+
+</div>
+
+</div>
+</div>
+
+<script>
+
+const API = "https://xat-api-secure.karimadilv74.workers.dev/?u=";
+
+async function search(){
+
+let user = document.getElementById("userInput").value;
+if(!user) return;
+
+document.getElementById("loading").style.display="block";
+document.getElementById("profile").style.display="none";
+
+try{
+
+let res = await fetch(API + encodeURIComponent(user));
+let data = await res.json();
+
+document.getElementById("loading").style.display="none";
+document.getElementById("profile").style.display="block";
+
+document.getElementById("name").innerText = data.username || user;
+document.getElementById("id").innerText = data.id || data.user_id || "---";
+document.getElementById("nick").innerText = data.nickname || "---";
+document.getElementById("stat").innerText = data.status || "---";
+
+let avatar = data.avatar || "https://xat.com/images/default_avatar.png";
+document.getElementById("avatar").src = avatar;
+
+let status = data.is_online ? "ONLINE" : "OFFLINE";
+let badge = document.getElementById("status");
+badge.innerText = status;
+
+badge.className = "badge " + (data.is_online ? "online" : "offline");
+
+}catch(e){
+alert("User Not Found / API Error");
+document.getElementById("loading").style.display="none";
+}
+
+}
+
+</script>
+
+</body>
 </html>
