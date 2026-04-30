@@ -272,6 +272,9 @@ async function fetchData() {
         document.getElementById('searchView').style.display = 'none';
         document.getElementById('resultView').style.display = 'block';
 
+        // reset avatar opacity كل مرة
+        document.getElementById('avatarImg').style.opacity = '0';
+
         document.getElementById('displayName').innerText = data.username || user;
         document.getElementById('displayId').innerText = "REG ID: " + (data.user_id || data.id);
 
