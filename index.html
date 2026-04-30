@@ -191,10 +191,10 @@ footer b{color:var(--accent);}
 
 <div class="container">
 
-<div id="searchView" class="premium-card">
+<form id="searchView" class="premium-card" onsubmit="fetchData(); return false;">
 <div class="brand-title">
 <h1>RAMY PROFILE</h1>
-</div>
+</form>
 <input type="text" id="userInput" placeholder="ENTER ID OR NAME" autocomplete="off"
 onkeydown="if(event.key==='Enter'){fetchData()}">
 
