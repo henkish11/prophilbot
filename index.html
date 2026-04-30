@@ -3,347 +3,271 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>xatProfile | ULTRA GOD SYSTEM</title>
+<title>RAMY PROFILE</title>
 
-<link rel="icon" href="https://xatimg.com/image/8mgikUTBM7PK.png">
+<link rel="icon" type="image/png" href="https://xatimg.com/image/8mgikUTBM7PK.png">
+
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
 
 <style>
-:root{
---bg:#050507;
---glass:rgba(18,18,28,0.55);
---border:rgba(255,255,255,0.08);
---accent:#ffffff;
---neon:#7dd3fc;
---green:#10b981;
---red:#ef4444;
+:root {
+--bg:#070816;
+--glass:rgba(14,16,37,0.85);
+--border:rgba(100,108,255,0.15);
+--accent:#00e5ff;
+--accent-dim:#9ca3af;
+--success:#00ffa3;
+--error:#f43f5e;
+--vio:#707eff;
 }
 
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Plus Jakarta Sans';transition:.35s;}
+*{box-sizing:border-box;margin:0;padding:0;transition:all .4s ease;}
 
 body{
-background:var(--bg);
+background: radial-gradient(circle at 50% -20%, rgba(0,229,255,.1), transparent 50%), #05050f;
 color:#fff;
+font-family:'Plus Jakarta Sans',sans-serif;
 display:flex;
-justify-content:center;
 align-items:center;
+justify-content:center;
 min-height:100vh;
-overflow:hidden;
+overflow-x:hidden;
+padding:40px 0;
 }
 
-/* energy background */
-.energy{
-position:fixed;
-width:600px;
-height:600px;
-background:radial-gradient(circle,rgba(125,211,252,.12),transparent 70%);
-filter:blur(60px);
-top:5%;
-left:5%;
-animation:move 18s infinite alternate;
-z-index:-1;
-}
-@keyframes move{
-from{transform:translate(0,0);}
-to{transform:translate(120px,140px);}
-}
+.container{width:100%;max-width:440px;padding:20px;}
 
-.container{
-width:100%;
-max-width:520px;
-padding:20px;
-}
-
-/* MAIN CARD */
-.card{
+.premium-card{
 background:var(--glass);
-backdrop-filter:blur(35px);
+backdrop-filter:blur(40px);
 border:1px solid var(--border);
-border-radius:30px;
-padding:25px;
-box-shadow:0 40px 120px rgba(0,0,0,.8);
+border-radius:40px;
+padding:45px 40px;
+box-shadow:0 40px 100px rgba(0,0,0,.8);
 }
 
-/* TITLE */
-h2{
-text-align:center;
-font-size:28px;
+.brand-title{text-align:center;margin-bottom:30px;}
+
+.brand-title h1{
+font-size:48px;
 font-weight:800;
-margin-bottom:15px;
+letter-spacing:-2px;
+background:linear-gradient(to right,#fff,var(--vio),var(--accent),var(--vio),#fff);
+background-size:200% auto;
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+animation:shineText 3s linear infinite;
 }
-h2 span{opacity:.4;font-weight:300;}
 
-/* INPUT */
+@keyframes shineText{
+to{background-position:200% center;}
+}
+
 input{
 width:100%;
-padding:16px;
-border-radius:14px;
+background:rgba(0,0,0,.3);
 border:1px solid var(--border);
-background:rgba(255,255,255,.02);
+padding:22px;
+border-radius:24px;
 color:#fff;
+font-size:16px;
 text-align:center;
-margin-bottom:10px;
-outline:none;
+margin-bottom:20px;
 }
 
-/* BUTTON */
-button{
+.btn-main{
 width:100%;
-padding:16px;
-border-radius:14px;
-border:none;
-background:#fff;
+background:var(--accent);
 color:#000;
-font-weight:900;
+padding:20px;
+border-radius:24px;
+border:none;
+font-weight:800;
 cursor:pointer;
-}
-button:hover{transform:scale(1.03);}
-
-/* PROFILE */
-.profile{display:none;animation:fade .4s ease;}
-@keyframes fade{
-from{opacity:0;transform:translateY(15px);}
-to{opacity:1;transform:translateY(0);}
+text-transform:uppercase;
 }
 
-/* AVATAR */
-.avatar{
-width:120px;
-height:120px;
-border-radius:30px;
+.avatar-wrapper{
+width:136px;
+height:136px;
+border-radius:50%;
 margin:auto;
-overflow:hidden;
-border:2px solid var(--border);
-box-shadow:0 0 30px rgba(125,211,252,.15);
+display:flex;
+align-items:center;
+justify-content:center;
+background:conic-gradient(from 0deg,transparent,var(--accent),var(--vio),transparent);
+animation:rotateFrame 3s linear infinite;
 }
-.avatar img{
+
+@keyframes rotateFrame{
+from{transform:rotate(0)}
+to{transform:rotate(360deg)}
+}
+
+.avatar-container{
+width:128px;
+height:128px;
+border-radius:50%;
+overflow:hidden;
+background:#000;
+display:flex;
+align-items:center;
+justify-content:center;
+}
+
+#avatarImg{
 width:100%;
 height:100%;
+border-radius:50%;
 object-fit:cover;
 opacity:0;
+border:4px solid #070816;
 }
 
-/* NAME */
-.name{
-text-align:center;
-font-size:22px;
-font-weight:800;
-margin-top:10px;
-}
-
-.id{
-text-align:center;
-font-size:11px;
-opacity:.6;
-}
-
-/* STATUS */
-.status{
-margin:10px auto;
-padding:6px 14px;
-border-radius:20px;
+.status-badge{
 font-size:10px;
-width:max-content;
-font-weight:700;
-}
-
-.online{background:rgba(16,185,129,.1);color:var(--green);}
-.offline{background:rgba(239,68,68,.1);color:var(--red);}
-
-/* NAV TABS */
-.tabs{
+font-weight:800;
+text-transform:uppercase;
+padding:8px 18px;
+border-radius:100px;
+margin:15px auto;
 display:flex;
-margin-top:15px;
-border-radius:14px;
-overflow:hidden;
-border:1px solid var(--border);
+align-items:center;
+gap:8px;
+width:fit-content;
 }
 
-.tab{
-flex:1;
-text-align:center;
-padding:10px;
-font-size:11px;
-cursor:pointer;
-background:rgba(255,255,255,.02);
-}
+.status-badge.online{color:var(--success);}
+.status-badge.offline{color:var(--error);}
 
-.tab.active{
-background:#fff;
-color:#000;
-font-weight:900;
-}
-
-/* PANELS */
-.panel{display:none;margin-top:15px;}
-.panel.active{display:block;}
-
-/* BOX */
-.box{
-padding:12px;
-border-radius:12px;
-border:1px solid var(--border);
-background:rgba(255,255,255,.02);
-margin-bottom:10px;
-cursor:pointer;
-}
-.box:hover{transform:scale(1.02);}
-
-.label{font-size:9px;opacity:.5;}
-.value{font-size:12px;font-weight:600;overflow:auto;}
-
-/* FOOTER */
-footer{
-text-align:center;
-margin-top:15px;
-font-size:10px;
-opacity:.5;
-}
-
-/* TOAST */
-.toast{
-position:fixed;
-bottom:20px;
-background:#fff;
-color:#000;
-padding:10px 18px;
-border-radius:12px;
-display:none;
+.display-name{
+font-size:28px;
 font-weight:800;
+text-align:center;
+text-transform:uppercase;
 }
+
+.display-id{
+font-size:12px;
+color:var(--accent);
+font-weight:700;
+text-align:center;
+margin-bottom:25px;
+}
+
+.info-grid{display:flex;flex-direction:column;gap:12px;}
+
+.info-item{
+background:rgba(255,255,255,.02);
+border:1px solid var(--border);
+padding:18px;
+border-radius:24px;
+cursor:pointer;
+}
+
+.info-label{
+font-size:9px;
+color:var(--accent-dim);
+margin-bottom:6px;
+}
+
+.info-val{
+font-size:14px;
+color:var(--vio);
+}
+
+footer{
+margin-top:30px;
+text-align:center;
+font-size:11px;
+color:var(--accent-dim);
+}
+
+footer b{color:var(--accent);}
 </style>
 </head>
 
 <body>
 
-<div class="energy"></div>
-
 <div class="container">
 
-<!-- SEARCH -->
-<div class="card" id="searchBox">
-<h2>xat<span>Profile</span></h2>
-<input id="userInput" placeholder="ENTER ID OR NAME">
-<button onclick="loadProfile()">SEARCH SYSTEM</button>
+<div id="searchView" class="premium-card">
+<div class="brand-title">
+<h1>RAMY PROFILE</h1>
 </div>
 
-<!-- PROFILE -->
-<div class="card profile" id="profileBox">
+<input type="text" id="userInput" placeholder="ENTER ID OR NAME">
+<button class="btn-main" id="goBtn" onclick="fetchData()">Search Profile</button>
+</div>
 
-<div class="avatar">
+<div id="resultView" class="premium-card" style="display:none;">
+<div class="avatar-wrapper">
+<div class="avatar-container">
 <img id="avatarImg">
 </div>
-
-<div class="name" id="name">---</div>
-<div class="id" id="id">---</div>
-
-<div id="status" class="status">CHECKING</div>
-
-<!-- NAV -->
-<div class="tabs">
-<div class="tab active" onclick="openPanel(0)">PROFILE</div>
-<div class="tab" onclick="openPanel(1)">DATA</div>
-<div class="tab" onclick="openPanel(2)">SYSTEM</div>
 </div>
 
-<!-- PANEL 1 -->
-<div class="panel active">
-<div class="box">
-<div class="label">Nickname</div>
-<div class="value" id="nick">---</div>
+<div id="statusBadge" class="status-badge">CHECKING</div>
+
+<div id="displayName" class="display-name">---</div>
+<div id="displayId" class="display-id">---</div>
+
+<div class="info-grid">
+<div class="info-item" onclick="copyMe('nickVal')">
+<div class="info-label">Nickname</div>
+<div class="info-val" id="nickVal">---</div>
 </div>
 
-<div class="box">
-<div class="label">Status</div>
-<div class="value" id="statusVal">---</div>
-</div>
-</div>
-
-<!-- PANEL 2 -->
-<div class="panel">
-<div class="box">
-<div class="label">Avatar URL</div>
-<div class="value" id="avatar">---</div>
+<div class="info-item" onclick="copyMe('statusVal')">
+<div class="info-label">Status</div>
+<div class="info-val" id="statusVal">---</div>
 </div>
 
-<div class="box">
-<div class="label">User ID</div>
-<div class="value" id="uid">---</div>
+<div class="info-item" onclick="copyMe('avatarUrlVal')">
+<div class="info-label">Avatar</div>
+<div class="info-val" id="avatarUrlVal">---</div>
+</div>
+
+<div class="info-item" onclick="copyMe('xatframeVal')">
+<div class="info-label">xatframe / hp</div>
+<div class="info-val" id="xatframeVal">---</div>
 </div>
 </div>
 
-<!-- PANEL 3 -->
-<div class="panel">
-<div class="box">
-<div class="label">SYSTEM</div>
-<div class="value">ULTRA GOD MODE ACTIVE</div>
-</div>
-
-<div class="box">
-<div class="label">Developer</div>
-<div class="value">ramy</div>
-</div>
-
-<div class="box">
-<div class="label">Engine</div>
-<div class="value">xatProfile v3 Core</div>
-</div>
-</div>
-
-<button onclick="location.reload()">NEW QUERY</button>
-
-<footer>POWERED BY <b>ramy</b></footer>
+<button class="btn-main" style="margin-top:20px;background:#111;color:#fff;" onclick="location.reload()">New Search</button>
 
 </div>
 
-</div>
+<footer>by <b>ramy</b></footer>
 
-<div class="toast" id="toast">COPIED</div>
+</div>
 
 <script>
-const API="https://xat-api-secure.karimadilv74.workers.dev/?u=";
+const SECURE_API="https://xat-api-secure.karimadilv74.workers.dev/?u=";
 
-/* tabs */
-function openPanel(i){
-let tabs=document.querySelectorAll(".tab");
-let panels=document.querySelectorAll(".panel");
+async function fetchData(){
+let user=document.getElementById('userInput').value.trim();
+if(!user)return;
 
-tabs.forEach(t=>t.classList.remove("active"));
-panels.forEach(p=>p.classList.remove("active"));
+let res=await fetch(SECURE_API+user);
+let data=await res.json();
 
-tabs[i].classList.add("active");
-panels[i].classList.add("active");
+document.getElementById('searchView').style.display='none';
+document.getElementById('resultView').style.display='block';
+
+document.getElementById('displayName').innerText=data.username||user;
+document.getElementById('displayId').innerText="ID: "+(data.id||data.user_id);
+document.getElementById('nickVal').innerText=data.nickname||"-";
+document.getElementById('statusVal').innerText=data.status||"-";
+document.getElementById('avatarUrlVal').innerText=data.avatar||"-";
+document.getElementById('xatframeVal').innerText=data.xatframe||"-";
+
+document.getElementById('avatarImg').src=data.avatar;
+document.getElementById('avatarImg').style.opacity=1;
 }
 
-/* load */
-async function loadProfile(){
-let u=document.getElementById("userInput").value;
-if(!u) return;
-
-let r=await fetch(API+u);
-let d=await r.json();
-
-document.getElementById("searchBox").style.display="none";
-document.getElementById("profileBox").style.display="block";
-
-document.getElementById("name").innerText=d.username||u;
-document.getElementById("id").innerText="ID: "+(d.id||"---");
-
-document.getElementById("nick").innerText=d.nickname||"---";
-document.getElementById("statusVal").innerText=d.status||"---";
-document.getElementById("avatar").innerText=d.avatar||"---";
-document.getElementById("uid").innerText=d.id||"---";
-
-let img=d.avatar||"https://xat.com/images/default_avatar.png";
-let a=document.getElementById("avatarImg");
-a.src=img;
-a.onload=()=>a.style.opacity=1;
-
-let st=document.getElementById("status");
-let online=d.is_online;
-
-st.innerText=online?"ONLINE":"OFFLINE";
-st.className="status "+(online?"online":"offline");
+function copyMe(id){
+navigator.clipboard.writeText(document.getElementById(id).innerText);
 }
 </script>
 
