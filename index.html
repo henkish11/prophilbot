@@ -73,6 +73,7 @@ color:#fff;
 font-size:16px;
 text-align:center;
 margin-bottom:20px;
+outline:none;
 }
 
 .btn-main{
@@ -191,17 +192,22 @@ footer b{color:var(--accent);}
 
 <div class="container">
 
+<!-- ✅ FORM FIX -->
 <form id="searchView" class="premium-card" onsubmit="fetchData(); return false;">
+
 <div class="brand-title">
 <h1>RAMY PROFILE</h1>
-</form>
-<input type="text" id="userInput" placeholder="ENTER ID OR NAME" autocomplete="off"
-onkeydown="if(event.key==='Enter'){fetchData()}">
-
-<button class="btn-main" id="goBtn" onclick="fetchData()">Search Profile</button>
 </div>
 
+<input type="text" id="userInput" placeholder="ENTER ID OR NAME" autocomplete="off">
+
+<button class="btn-main" type="submit">Search Profile</button>
+
+</form>
+
+<!-- RESULT -->
 <div id="resultView" class="premium-card" style="display:none;">
+
 <div class="avatar-wrapper">
 <div class="avatar-container">
 <img id="avatarImg">
@@ -246,27 +252,30 @@ onkeydown="if(event.key==='Enter'){fetchData()}">
 <script>
 const SECURE_API="https://xat-api-secure.karimadilv74.workers.dev/?u=";
 
-// تشغيل البحث بزر Enter
-window.onload = function(){
-    document.getElementById('userInput').addEventListener('keydown', function(e){
-        if(e.key === 'Enter'){
-            fetchData();
-        }
-    });
-};
-
 async function fetchData(){
-    let user=document.getElementById('userInput').value.trim();
-    if(!user)return;
+let user=document.getElementById('userInput').value.trim();
+if(!user)return;
 
-    let res=await fetch(SECURE_API+user);
-    let data=await res.json();
+let res=await fetch(SECURE_API+user);
+let data=await res.json();
 
-    document.getElementById('searchView').style.display='none';
-    document.getElementById('resultView').style.display='block';
+document.getElementById('searchView').style.display='none';
+document.getElementById('resultView').style.display='block';
 
-    document.getElementById('displayName').innerText=data.username||user;
-    document.getElementById('displayId').innerText="ID: "+(data.id||data.user_id);
+document.getElementById('displayName').innerText=data.username||user;
+document.getElementById('displayId').innerText="ID: "+(data.id||data.user_id);
+
+document.getElementById('nickVal').innerText=data.nickname||"-";
+document.getElementById('statusVal').innerText=data.status||"-";
+document.getElementById('avatarUrlVal').innerText=data.avatar||"-";
+document.getElementById('xatframeVal').innerText=data.xatframe||"-";
+
+document.getElementById('avatarImg').src=data.avatar||"";
+document.getElementById('avatarImg').style.opacity=1;
+}
+
+function copyMe(id){
+navigator.clipboard.writeText(document.getElementById(id).innerText);
 }
 </script>
 
