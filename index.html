@@ -6,7 +6,6 @@
 <title>RAMY PROFILE</title>
 
 <link rel="icon" type="image/png" href="https://xatimg.com/image/8mgikUTBM7PK.png">
-
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
 
 <style>
@@ -21,7 +20,7 @@
 --vio:#707eff;
 }
 
-*{box-sizing:border-box;margin:0;padding:0;transition:all .4s ease;}
+*{box-sizing:border-box;margin:0;padding:0;transition:.3s;}
 
 body{
 background: radial-gradient(circle at 50% -20%, rgba(0,229,255,.1), transparent 50%), #05050f;
@@ -31,7 +30,6 @@ display:flex;
 align-items:center;
 justify-content:center;
 min-height:100vh;
-overflow-x:hidden;
 padding:40px 0;
 }
 
@@ -51,26 +49,18 @@ box-shadow:0 40px 100px rgba(0,0,0,.8);
 .brand-title h1{
 font-size:48px;
 font-weight:800;
-letter-spacing:-2px;
-background:linear-gradient(to right,#fff,var(--vio),var(--accent),var(--vio),#fff);
-background-size:200% auto;
+background:linear-gradient(to right,#fff,var(--vio),var(--accent),#fff);
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent;
-animation:shineText 3s linear infinite;
-}
-
-@keyframes shineText{
-to{background-position:200% center;}
 }
 
 input{
 width:100%;
-background:rgba(0,0,0,.3);
-border:1px solid var(--border);
 padding:22px;
 border-radius:24px;
+border:1px solid var(--border);
+background:rgba(0,0,0,.3);
 color:#fff;
-font-size:16px;
 text-align:center;
 margin-bottom:20px;
 outline:none;
@@ -78,11 +68,10 @@ outline:none;
 
 .btn-main{
 width:100%;
-background:var(--accent);
-color:#000;
 padding:20px;
-border-radius:24px;
 border:none;
+border-radius:24px;
+background:var(--accent);
 font-weight:800;
 cursor:pointer;
 text-transform:uppercase;
@@ -97,10 +86,10 @@ display:flex;
 align-items:center;
 justify-content:center;
 background:conic-gradient(from 0deg,transparent,var(--accent),var(--vio),transparent);
-animation:rotateFrame 3s linear infinite;
+animation:rotate 3s linear infinite;
 }
 
-@keyframes rotateFrame{
+@keyframes rotate{
 from{transform:rotate(0)}
 to{transform:rotate(360deg)}
 }
@@ -119,7 +108,6 @@ justify-content:center;
 #avatarImg{
 width:100%;
 height:100%;
-border-radius:50%;
 object-fit:cover;
 opacity:0;
 border:4px solid #070816;
@@ -128,18 +116,12 @@ border:4px solid #070816;
 .status-badge{
 font-size:10px;
 font-weight:800;
-text-transform:uppercase;
 padding:8px 18px;
 border-radius:100px;
 margin:15px auto;
 display:flex;
-align-items:center;
-gap:8px;
 width:fit-content;
 }
-
-.status-badge.online{color:var(--success);}
-.status-badge.offline{color:var(--error);}
 
 .display-name{
 font-size:28px;
@@ -151,7 +133,6 @@ text-transform:uppercase;
 .display-id{
 font-size:12px;
 color:var(--accent);
-font-weight:700;
 text-align:center;
 margin-bottom:25px;
 }
@@ -159,17 +140,16 @@ margin-bottom:25px;
 .info-grid{display:flex;flex-direction:column;gap:12px;}
 
 .info-item{
-background:rgba(255,255,255,.02);
-border:1px solid var(--border);
 padding:18px;
 border-radius:24px;
+border:1px solid var(--border);
+background:rgba(255,255,255,.02);
 cursor:pointer;
 }
 
 .info-label{
 font-size:9px;
 color:var(--accent-dim);
-margin-bottom:6px;
 }
 
 .info-val{
@@ -183,7 +163,6 @@ text-align:center;
 font-size:11px;
 color:var(--accent-dim);
 }
-
 footer b{color:var(--accent);}
 </style>
 </head>
@@ -192,8 +171,8 @@ footer b{color:var(--accent);}
 
 <div class="container">
 
-<!-- ✅ FORM FIX -->
-<form id="searchView" class="premium-card" onsubmit="fetchData(); return false;">
+<!-- ✅ FIXED FORM -->
+<form id="searchView" class="premium-card" onsubmit="handleSearch(event)">
 
 <div class="brand-title">
 <h1>RAMY PROFILE</h1>
@@ -214,34 +193,21 @@ footer b{color:var(--accent);}
 </div>
 </div>
 
-<div id="statusBadge" class="status-badge">CHECKING</div>
+<div id="statusBadge">CHECKING</div>
 
-<div id="displayName" class="display-name">---</div>
-<div id="displayId" class="display-id">---</div>
+<div id="displayName">---</div>
+<div id="displayId">---</div>
 
 <div class="info-grid">
-<div class="info-item" onclick="copyMe('nickVal')">
-<div class="info-label">Nickname</div>
-<div class="info-val" id="nickVal">---</div>
+<div class="info-item"><div class="info-label">Nickname</div><div class="info-val" id="nickVal">---</div></div>
+<div class="info-item"><div class="info-label">Status</div><div class="info-val" id="statusVal">---</div></div>
+<div class="info-item"><div class="info-label">Avatar</div><div class="info-val" id="avatarUrlVal">---</div></div>
+<div class="info-item"><div class="info-label">xatframe</div><div class="info-val" id="xatframeVal">---</div></div>
 </div>
 
-<div class="info-item" onclick="copyMe('statusVal')">
-<div class="info-label">Status</div>
-<div class="info-val" id="statusVal">---</div>
-</div>
-
-<div class="info-item" onclick="copyMe('avatarUrlVal')">
-<div class="info-label">Avatar</div>
-<div class="info-val" id="avatarUrlVal">---</div>
-</div>
-
-<div class="info-item" onclick="copyMe('xatframeVal')">
-<div class="info-label">xatframe / hp</div>
-<div class="info-val" id="xatframeVal">---</div>
-</div>
-</div>
-
-<button class="btn-main" style="margin-top:20px;background:#111;color:#fff;" onclick="location.reload()">New Search</button>
+<button class="btn-main" onclick="location.reload()" style="margin-top:20px;background:#111;color:#fff;">
+New Search
+</button>
 
 </div>
 
@@ -252,9 +218,16 @@ footer b{color:var(--accent);}
 <script>
 const SECURE_API="https://xat-api-secure.karimadilv74.workers.dev/?u=";
 
+/* ✅ FIX: unified search handler */
+function handleSearch(e){
+e.preventDefault();
+fetchData();
+}
+
 async function fetchData(){
+
 let user=document.getElementById('userInput').value.trim();
-if(!user)return;
+if(!user) return;
 
 let res=await fetch(SECURE_API+user);
 let data=await res.json();
@@ -272,10 +245,6 @@ document.getElementById('xatframeVal').innerText=data.xatframe||"-";
 
 document.getElementById('avatarImg').src=data.avatar||"";
 document.getElementById('avatarImg').style.opacity=1;
-}
-
-function copyMe(id){
-navigator.clipboard.writeText(document.getElementById(id).innerText);
 }
 </script>
 
