@@ -195,8 +195,9 @@ footer b{color:var(--accent);}
 <div class="brand-title">
 <h1>RAMY PROFILE</h1>
 </div>
+<input type="text" id="userInput" placeholder="ENTER ID OR NAME" autocomplete="off"
+onkeydown="if(event.key==='Enter'){fetchData()}">
 
-<input type="text" id="userInput" placeholder="ENTER ID OR NAME">
 <button class="btn-main" id="goBtn" onclick="fetchData()">Search Profile</button>
 </div>
 
