@@ -272,6 +272,11 @@ async function fetchData() {
         document.getElementById('searchView').style.display = 'none';
         document.getElementById('resultView').style.display = 'block';
 
+         // 👇 ضيف ده هنا
+         document.getElementById('avatarImg').onload = function () {
+         this.style.opacity = '1';
+         };
+
         // reset avatar opacity كل مرة
         document.getElementById('avatarImg').style.opacity = '0';
 
